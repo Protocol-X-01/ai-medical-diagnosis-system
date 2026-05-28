@@ -4,10 +4,6 @@
   "installCommand": "npm install",
   "framework": "nextjs",
   "regions": ["iad1"],
-  "env": {
-    "NEXT_PUBLIC_AWS_REGION": "@aws_region",
-    "NEXT_PUBLIC_API_GATEWAY_URL": "@api_gateway_url"
-  },
   "headers": [
     {
       "source": "/(.*)",
@@ -33,12 +29,6 @@
           "value": "camera=(), microphone=(), geolocation=()"
         }
       ]
-    }
-  ],
-  "rewrites": [
-    {
-      "source": "/api/:path*",
-      "destination": "/api/:path*"
     }
   ]
 }
