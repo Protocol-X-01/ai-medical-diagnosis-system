@@ -284,6 +284,78 @@ export default function DiagnosePage() {
                   rows={4}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 placeholder:text-gray-400"
                 />
+              {/* Medical Images Upload */}
+              <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                <label className="block text-sm font-semibold text-gray-900 mb-2">
+                  Medical Images (Optional)
+                </label>
+                <p className="text-sm text-gray-600 mb-4">
+                  Upload CT scans, MRI, X-rays, or photos of skin conditions for enhanced diagnosis
+                </p>
+                
+                <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-blue-500 transition-colors cursor-pointer">
+                  <input
+                    type="file"
+                    id="medical-images"
+                    multiple
+                    accept="image/*,.dcm"
+                    className="hidden"
+                    onChange={(e) => {
+                      const files = Array.from(e.target.files || [])
+                      console.log('Files selected:', files.map(f => f.name))
+                      // Handle file upload here
+                    }}
+                  />
+                  <label htmlFor="medical-images" className="cursor-pointer">
+                    <Upload className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+                    <p className="text-gray-700 font-medium mb-2">
+                      Click to upload or drag and drop
+                    </p>
+                    <p className="text-sm text-gray-500">
+                      DICOM, PNG, JPG, or JPEG (Max 10MB per file)
+                    </p>
+                  </label>
+                </div>
+
+                <div className="mt-4 grid grid-cols-2 md:grid-cols-4 gap-3">
+                  <button
+                    type="button"
+                    className="flex items-center justify-center gap-2 px-4 py-3 border-2 border-gray-300 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition-colors"
+                  >
+                    <span className="text-2xl">🫁</span>
+                    <span className="text-sm font-medium text-gray-700">CT Scan</span>
+                  </button>
+                  <button
+                    type="button"
+                    className="flex items-center justify-center gap-2 px-4 py-3 border-2 border-gray-300 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition-colors"
+                  >
+                    <span className="text-2xl">🧠</span>
+                    <span className="text-sm font-medium text-gray-700">MRI</span>
+                  </button>
+                  <button
+                    type="button"
+                    className="flex items-center justify-center gap-2 px-4 py-3 border-2 border-gray-300 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition-colors"
+                  >
+                    <span className="text-2xl">🦴</span>
+                    <span className="text-sm font-medium text-gray-700">X-Ray</span>
+                  </button>
+                  <button
+                    type="button"
+                    className="flex items-center justify-center gap-2 px-4 py-3 border-2 border-gray-300 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition-colors"
+                  >
+                    <span className="text-2xl">🔬</span>
+                    <span className="text-sm font-medium text-gray-700">Skin</span>
+                  </button>
+                </div>
+
+                <div className="mt-4 bg-blue-50 border border-blue-200 rounded-lg p-4">
+                  <p className="text-sm text-blue-800">
+                    <strong>AI Image Analysis:</strong> Our imaging agent will analyze uploaded scans for abnormalities, 
+                    lesions, fractures, and other diagnostic indicators to enhance diagnosis accuracy.
+                  </p>
+                </div>
+              </div>
+
               </div>
 
               {/* Submit Button */}
