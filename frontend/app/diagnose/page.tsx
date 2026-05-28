@@ -169,7 +169,7 @@ export default function DiagnosePage() {
                   value={patientId}
                   onChange={(e) => setPatientId(e.target.value)}
                   placeholder="e.g., P-2024-001"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 placeholder:text-gray-400"
                   required
                 />
               </div>
@@ -186,7 +186,7 @@ export default function DiagnosePage() {
                     onChange={(e) => setCurrentSymptom(e.target.value)}
                     onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addSymptom())}
                     placeholder="Enter symptom and press Enter"
-                    className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 placeholder:text-gray-400"
                   />
                   <button
                     type="button"
@@ -226,7 +226,7 @@ export default function DiagnosePage() {
                       value={vitalSigns.temperature}
                       onChange={(e) => setVitalSigns({ ...vitalSigns, temperature: e.target.value })}
                       placeholder="98.6"
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 placeholder:text-gray-400"
                     />
                   </div>
                   <div>
@@ -236,7 +236,7 @@ export default function DiagnosePage() {
                       value={vitalSigns.bloodPressure}
                       onChange={(e) => setVitalSigns({ ...vitalSigns, bloodPressure: e.target.value })}
                       placeholder="120/80"
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 placeholder:text-gray-400"
                     />
                   </div>
                   <div>
@@ -246,7 +246,17 @@ export default function DiagnosePage() {
                       value={vitalSigns.heartRate}
                       onChange={(e) => setVitalSigns({ ...vitalSigns, heartRate: e.target.value })}
                       placeholder="72"
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 placeholder:text-gray-400"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm text-gray-600 mb-1">Respiratory Rate</label>
+                    <input
+                      type="text"
+                      value={vitalSigns.respiratoryRate}
+                      onChange={(e) => setVitalSigns({ ...vitalSigns, respiratoryRate: e.target.value })}
+                      placeholder="16"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 placeholder:text-gray-400"
                     />
                   </div>
                   <div>
@@ -256,7 +266,7 @@ export default function DiagnosePage() {
                       value={vitalSigns.oxygenSaturation}
                       onChange={(e) => setVitalSigns({ ...vitalSigns, oxygenSaturation: e.target.value })}
                       placeholder="98"
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 placeholder:text-gray-400"
                     />
                   </div>
                 </div>
@@ -272,7 +282,7 @@ export default function DiagnosePage() {
                   onChange={(e) => setMedicalHistory(e.target.value)}
                   placeholder="Enter relevant medical history, medications, allergies..."
                   rows={4}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 placeholder:text-gray-400"
                 />
               </div>
 
