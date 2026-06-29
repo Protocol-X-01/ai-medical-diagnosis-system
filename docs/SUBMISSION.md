@@ -3,7 +3,7 @@
 **Project:** AI Medical Diagnosis — Hallucination-Resistant Clinical Decision Support
 **Track:** Monetizable B2B Application
 **Live app:** https://ai-medical-diagnosis-dusky.vercel.app
-**AWS database:** **Amazon DynamoDB** (on-demand, `us-east-1`) — tables `MedicalConditions` and `Diagnoses`
+**AWS database:** **Amazon DynamoDB** (on-demand, `us-east-1`) — tables `MedicalConditions`, `Diagnoses`, `Patients`, `Signups`
 
 ---
 
@@ -30,19 +30,32 @@ verified medical sources** — and any output that cannot be traced to a source 
 - **Ambiguity → ranked options, not a black box** — when no single condition dominates we present
   the ranked differential **options** for clinician review (encyclopedia behaviour), rather than
   an opaque "handover".
+- **Disagreement is surfaced, not hidden** — even when the quorum *reaches* consensus, if a runner-up
+  sits within a narrow margin the result is flagged **contested** with the close differential shown
+  ("close call — keep X in mind"), so a near-tie never masquerades as a confident single answer.
 - **Treatments & red-flag recommendations** — guideline-derived management for the consensus
   condition, with "escalate immediately if…" safety-netting.
 - **Image analysis & visual differential** — an NVIDIA NIM vision model extracts *visible features*
   from an uploaded image (assistive, not a diagnostic imaging read); the result shows **look-alike
   conditions with open-licensed reference images** for side-by-side comparison.
 - **Staff encyclopedia lookup** — free-text search across the full corpus by name / ICD-10 / symptom,
-  with citations, treatments and reference images.
+  with citations, treatments and reference images. High-yield conditions carry **AMBOSS-style teaching
+  depth** (pathophysiology, key investigations, learning points).
+- **Embeddable, multilingual pre-triage widget** — a patient-facing widget the clinic embeds on its
+  own website, returning a safe disposition (urgent / book / self-care). Available in **English,
+  Spanish, Chinese and French** via NVIDIA **`riva-translate-4b`** (the NY client base is multilingual):
+  patient input is translated to English for matching and the guidance is translated back. Never diagnoses.
+- **Patient records** — clinic-held patient records (`Patients` table) with each patient's linked
+  assessment history; the AI engine only ever receives a **pseudonymous reference**, never the identity.
+- **Evidence library** — a Research page surfaces real, current literature pulled from **PubMed (NCBI)**.
+- **Verified citations** — every hand-authored citation URL is **link-checked** (NICE CKS / NHS /
+  DermNet / guideline bodies); templated ontology links are generated from real OMIM/Orphanet/MedlinePlus IDs.
 
 ## How we use the AWS database (Amazon DynamoDB)
 
 DynamoDB is on the **critical path of every request**, used for both reads and writes:
 
-- **Read — grounding:** `MedicalConditions` holds **11,230 verified entries** across tiers —
+- **Read — grounding:** `MedicalConditions` holds **11,339 verified entries** across tiers —
   guideline-cited curated conditions (NICE/ESC/IDSA/ADA/GOLD/KDIGO/WHO/AHA), **8,000+ rare diseases**
   (HPO/OMIM/Orphanet), NIH MedlinePlus common topics, and a curated set of **visible conditions with
   reference images** (DermNet-cited). On each request the API retrieves candidates that match the
@@ -51,6 +64,8 @@ DynamoDB is on the **critical path of every request**, used for both reads and w
 - **Write — audit trail:** every assessment (consensus, per-model votes, citations, safety verdict,
   metadata) is persisted to the `Diagnoses` table — an immutable record. The in-app **dashboard reads
   this table live** (assessment count, consensus rate, average confidence, recent assessments).
+- **Operational tables:** `Patients` holds clinic-held patient records (assessments link back via a
+  pseudonymous reference) and `Signups` captures trial/access requests — both read and written live.
 
 DynamoDB (serverless, on-demand) is the right fit: it connects cleanly from Vercel serverless
 functions with no VPC/connection-pool overhead, and scales on demand with zero capacity planning.
@@ -70,7 +85,8 @@ sourced encyclopedia and defining the consensus rules.
 
 - **Frontend & API:** Next.js 16 (App Router), React 19, Tailwind — deployed on **Vercel**
 - **Database:** **Amazon DynamoDB** (AWS SDK v3, document client)
-- **AI:** NVIDIA NIM (OpenAI-compatible) — 3 quorum models + 1 content-safety model
+- **AI:** NVIDIA NIM (OpenAI-compatible) — 3 quorum models + 1 content-safety model + 1 vision model
+  (visual differential) + `riva-translate-4b` (EN/ES/中文/FR pre-triage)
 - **Security headers:** CSP-adjacent hardening via `vercel.json` (nosniff, X-Frame-Options DENY, etc.)
 
 ## How it maps to the judging criteria
@@ -131,7 +147,7 @@ extracted visible features and the **look-alike conditions with reference images
 the **Encyclopedia** page and search "psoriasis" to show staff lookup across 11,000+ cited entries.
 
 **[1:40–2:20] The AWS database.** Switch to the AWS console. Show the `MedicalConditions` table
-(11,230 verified entries that ground the answers) and the `Diagnoses` table filling with audit
+(11,339 verified entries that ground the answers) and the `Diagnoses` table filling with audit
 records. Back in the app, open the **Dashboard** — its counts (assessments, consensus rate,
 average confidence) are read **live from that `Diagnoses` table**. "Every assessment is
 read-grounded and write-audited in DynamoDB."
@@ -148,5 +164,5 @@ nothing can be grounded, we withhold. This is decision support, not a replacemen
 - [x] Published Vercel project link — https://ai-medical-diagnosis-dusky.vercel.app
 - [x] Architecture diagram — `docs/architecture-diagram.svg`
 - [ ] Sub-3-minute demo video — script above (record)
-- [ ] Screenshot of AWS database usage — capture `MedicalConditions` + `Diagnoses` in the DynamoDB console
+- [ ] Screenshot of AWS database usage — capture `MedicalConditions`, `Diagnoses`, `Patients`, `Signups` in the DynamoDB console
 - [ ] Team ID on the Vercel project (confirm in submission form)

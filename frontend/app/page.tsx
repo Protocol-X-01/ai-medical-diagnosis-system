@@ -230,4 +230,3 @@ Citation-grounded AI clinical decision support for healthcare providers.
   )
 }
 
-// Made with Bob
