@@ -1,0 +1,858 @@
+{
+  "fetchedAt": "2026-06-29T08:25:29.442Z",
+  "source": "PubMed (NCBI E-utilities)",
+  "total": 60,
+  "topics": [
+    {
+      "category": "Cardiology",
+      "query": "ST-elevation myocardial infarction management",
+      "articles": [
+        {
+          "pmid": "23247304",
+          "title": "2013 ACCF/AHA guideline for the management of ST-elevation myocardial infarction: a report of the American College of Cardiology Foundation/American Heart Association Task Force on Practice Guidelines",
+          "authors": [
+            "O'Gara PT",
+            "Kushner FG",
+            "Ascheim DD",
+            "et al."
+          ],
+          "journal": "Circulation",
+          "year": 2013,
+          "doi": "10.1161/CIR.0b013e3182742cf6",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/23247304/"
+        },
+        {
+          "pmid": "40014670",
+          "title": "2025 ACC/AHA/ACEP/NAEMSP/SCAI Guideline for the Management of Patients With Acute Coronary Syndromes: A Report of the American College of Cardiology/American Heart Association Joint Committee on Clinical Practice Guidelines",
+          "authors": [
+            "Rao SV",
+            "O'Donoghue ML",
+            "Ruel M",
+            "et al."
+          ],
+          "journal": "Circulation",
+          "year": 2025,
+          "doi": "10.1161/CIR.0000000000001309",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/40014670/"
+        },
+        {
+          "pmid": "23256914",
+          "title": "2013 ACCF/AHA guideline for the management of ST-elevation myocardial infarction: a report of the American College of Cardiology Foundation/American Heart Association Task Force on Practice Guidelines",
+          "authors": [
+            "O'Gara PT",
+            "Kushner FG",
+            "Ascheim DD",
+            "et al."
+          ],
+          "journal": "Journal of the American College of Cardiology",
+          "year": 2013,
+          "doi": "10.1016/j.jacc.2012.11.019",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/23256914/"
+        },
+        {
+          "pmid": "33320487",
+          "title": "Evaluation and management of ST-segment elevation myocardial infarction in the emergency department",
+          "authors": [
+            "Frank M",
+            "Sanders C",
+            "Berry BP"
+          ],
+          "journal": "Emergency medicine practice",
+          "year": 2021,
+          "url": "https://pubmed.ncbi.nlm.nih.gov/33320487/"
+        },
+        {
+          "pmid": "28400044",
+          "title": "Management algorithms for acute ST elevation myocardial infarction in less industrialized world",
+          "authors": [
+            "Mishra S",
+            "Ramakrishnan S",
+            "Babu AS",
+            "et al."
+          ],
+          "journal": "Indian heart journal",
+          "year": 2017,
+          "doi": "10.1016/j.ihj.2017.03.005",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/28400044/"
+        },
+        {
+          "pmid": "32320138",
+          "title": "Management of ST-segment-elevation myocardial infarction during the coronavirus disease 2019 (COVID-19) outbreak: Iranian\"247\" National Committee's position paper on primary percutaneous coronary intervention",
+          "authors": [
+            "Sadeghipour P",
+            "Talasaz AH",
+            "Eslami V",
+            "et al."
+          ],
+          "journal": "Catheterization and cardiovascular interventions : official journal of the Society for Cardiac Angiography & Interventions",
+          "year": 2021,
+          "doi": "10.1002/ccd.28889",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/32320138/"
+        }
+      ]
+    },
+    {
+      "category": "Infectious disease",
+      "query": "sepsis early recognition management",
+      "articles": [
+        {
+          "pmid": "33242267",
+          "title": "Recognition and management of sepsis: the nurse's role",
+          "authors": [
+            "Bleakley G",
+            "Cole M"
+          ],
+          "journal": "British journal of nursing (Mark Allen Publishing)",
+          "year": 2020,
+          "doi": "10.12968/bjon.2020.29.21.1248",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/33242267/"
+        },
+        {
+          "pmid": "38889923",
+          "title": "Recognition, diagnosis, and early management of suspected sepsis: summary of updated NICE guidance",
+          "authors": [
+            "Gildea A",
+            "Mulvihill C",
+            "McFarlane E",
+            "et al."
+          ],
+          "journal": "BMJ (Clinical research ed.)",
+          "year": 2024,
+          "doi": "10.1136/bmj.q1173",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38889923/"
+        },
+        {
+          "pmid": "34237760",
+          "title": "Top 10 Pearls for the Recognition, Evaluation, and Management of Maternal Sepsis",
+          "authors": [
+            "Shields A",
+            "de Assis V",
+            "Halscott T"
+          ],
+          "journal": "Obstetrics and gynecology",
+          "year": 2021,
+          "doi": "10.1097/AOG.0000000000004471",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/34237760/"
+        },
+        {
+          "pmid": "35776738",
+          "title": "Sepsis assessment and management in critically Ill adults: A systematic review",
+          "authors": [
+            "Rababa M",
+            "Bani Hamad D",
+            "Hayajneh AA"
+          ],
+          "journal": "PloS one",
+          "year": 2022,
+          "doi": "10.1371/journal.pone.0270711",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/35776738/"
+        },
+        {
+          "pmid": "38084084",
+          "title": "Pediatric Sepsis Diagnosis, Management, and Sub-phenotypes",
+          "authors": [
+            "Weiss SL",
+            "Fitzgerald JC"
+          ],
+          "journal": "Pediatrics",
+          "year": 2024,
+          "doi": "10.1542/peds.2023-062967",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38084084/"
+        },
+        {
+          "pmid": "32011568",
+          "title": "Early Recognition and Emergency Treatment of Sepsis and Septic Shock in Children",
+          "authors": [
+            "Hilarius KWE",
+            "Skippen PW",
+            "Kissoon N"
+          ],
+          "journal": "Pediatric emergency care",
+          "year": 2020,
+          "doi": "10.1097/PEC.0000000000002043",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/32011568/"
+        }
+      ]
+    },
+    {
+      "category": "Respiratory",
+      "query": "community-acquired pneumonia treatment guidelines",
+      "articles": [
+        {
+          "pmid": "31573350",
+          "title": "Diagnosis and Treatment of Adults with Community-acquired Pneumonia. An Official Clinical Practice Guideline of the American Thoracic Society and Infectious Diseases Society of America",
+          "authors": [
+            "Metlay JP",
+            "Waterer GW",
+            "Long AC",
+            "et al."
+          ],
+          "journal": "American journal of respiratory and critical care medicine",
+          "year": 2019,
+          "doi": "10.1164/rccm.201908-1581ST",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/31573350/"
+        },
+        {
+          "pmid": "40679934",
+          "title": "Diagnosis and Management of Community-acquired Pneumonia: An Official American Thoracic Society Clinical Practice Guideline",
+          "authors": [
+            "Jones BE",
+            "Ramirez JA",
+            "Oren E",
+            "et al."
+          ],
+          "journal": "American journal of respiratory and critical care medicine",
+          "year": 2026,
+          "doi": "10.1164/rccm.202507-1692ST",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/40679934/"
+        },
+        {
+          "pmid": "40749837",
+          "title": "Duration of antibiotic treatment for community-acquired pneumonia",
+          "authors": [
+            "Dinh A",
+            "Lebeaux D"
+          ],
+          "journal": "Infectious diseases now",
+          "year": 2025,
+          "doi": "10.1016/j.idnow.2025.105125",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/40749837/"
+        },
+        {
+          "pmid": "32805298",
+          "title": "Updates on community acquired pneumonia management in the ICU",
+          "authors": [
+            "Nair GB",
+            "Niederman MS"
+          ],
+          "journal": "Pharmacology & therapeutics",
+          "year": 2021,
+          "doi": "10.1016/j.pharmthera.2020.107663",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/32805298/"
+        },
+        {
+          "pmid": "33024653",
+          "title": "Etiology of community-acquired pneumonia in adults: a systematic review",
+          "authors": [
+            "Shoar S",
+            "Musher DM"
+          ],
+          "journal": "Pneumonia (Nathan Qld.)",
+          "year": 2020,
+          "doi": "10.1186/s41479-020-00074-3",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/33024653/"
+        },
+        {
+          "pmid": "24614242",
+          "title": "Community-acquired pneumonia",
+          "authors": [
+            "Remington LT",
+            "Sligl WI"
+          ],
+          "journal": "Current opinion in pulmonary medicine",
+          "year": 2014,
+          "doi": "10.1097/MCP.0000000000000052",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/24614242/"
+        }
+      ]
+    },
+    {
+      "category": "Endocrinology",
+      "query": "type 2 diabetes management guideline",
+      "articles": [
+        {
+          "pmid": "31530690",
+          "title": "Management of type 2 diabetes: now and the future",
+          "authors": [
+            "Edeghere S",
+            "English P"
+          ],
+          "journal": "Clinical medicine (London, England)",
+          "year": 2019,
+          "doi": "10.7861/clinmed.2019-0318",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/31530690/"
+        },
+        {
+          "pmid": "29794677",
+          "title": "ACOG Practice Bulletin No. 194: Polycystic Ovary Syndrome",
+          "authors": [
+            "American College of Obstetricians and Gynecologists' Committee on Practice Bulletins—Gynecology"
+          ],
+          "journal": "Obstetrics and gynecology",
+          "year": 2018,
+          "doi": "10.1097/AOG.0000000000002656",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/29794677/"
+        },
+        {
+          "pmid": "30903688",
+          "title": "Treatment of Diabetes in Older Adults: An Endocrine Society* Clinical Practice Guideline",
+          "authors": [
+            "LeRoith D",
+            "Biessels GJ",
+            "Braithwaite SS",
+            "et al."
+          ],
+          "journal": "The Journal of clinical endocrinology and metabolism",
+          "year": 2019,
+          "doi": "10.1210/jc.2019-00198",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/30903688/"
+        },
+        {
+          "pmid": "38943831",
+          "title": "International guideline comparison of lifestyle management for acute coronary syndrome and type 2 diabetes mellitus: A rapid review",
+          "authors": [
+            "Kemp BJ",
+            "Thompson DR",
+            "Coates V",
+            "et al."
+          ],
+          "journal": "Health policy (Amsterdam, Netherlands)",
+          "year": 2024,
+          "doi": "10.1016/j.healthpol.2024.105116",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38943831/"
+        },
+        {
+          "pmid": "37999891",
+          "title": "IFSO Consensus on Definitions and Clinical Practice Guidelines for Obesity Management-an International Delphi Study",
+          "authors": [
+            "Salminen P",
+            "Kow L",
+            "Aminian A",
+            "et al."
+          ],
+          "journal": "Obesity surgery",
+          "year": 2024,
+          "doi": "10.1007/s11695-023-06913-8",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/37999891/"
+        },
+        {
+          "pmid": "25776183",
+          "title": "Issues that impact type-2 diabetes self-management in rural communities",
+          "authors": [
+            "Ross S",
+            "Benavides-Vaello S",
+            "Schumann L",
+            "et al."
+          ],
+          "journal": "Journal of the American Association of Nurse Practitioners",
+          "year": 2015,
+          "doi": "10.1002/2327-6924.12225",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/25776183/"
+        }
+      ]
+    },
+    {
+      "category": "Neurology",
+      "query": "acute ischaemic stroke thrombolysis",
+      "articles": [
+        {
+          "pmid": "36907201",
+          "title": "Thrombolysis for acute ischaemic stroke: current status and future perspectives",
+          "authors": [
+            "Tsivgoulis G",
+            "Katsanos AH",
+            "Sandset EC",
+            "et al."
+          ],
+          "journal": "The Lancet. Neurology",
+          "year": 2023,
+          "doi": "10.1016/S1474-4422(22)00519-1",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/36907201/"
+        },
+        {
+          "pmid": "32507747",
+          "title": "Diagnosis and management of acute ischaemic stroke",
+          "authors": [
+            "Hurford R",
+            "Sekhar A",
+            "Hughes TAT",
+            "et al."
+          ],
+          "journal": "Practical neurology",
+          "year": 2020,
+          "doi": "10.1136/practneurol-2020-002557",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/32507747/"
+        },
+        {
+          "pmid": "39496213",
+          "title": "Contemporary Management of Acute Ischemic Stroke",
+          "authors": [
+            "Ho JP",
+            "Powers WJ"
+          ],
+          "journal": "Annual review of medicine",
+          "year": 2025,
+          "doi": "10.1146/annurev-med-050823-094312",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/39496213/"
+        },
+        {
+          "pmid": "40335091",
+          "title": "Advances in treatments for acute ischemic stroke",
+          "authors": [
+            "Sharma R",
+            "Lee K"
+          ],
+          "journal": "BMJ (Clinical research ed.)",
+          "year": 2025,
+          "doi": "10.1136/bmj-2023-076161",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/40335091/"
+        },
+        {
+          "pmid": "33563020",
+          "title": "Thrombus Composition and Efficacy of Thrombolysis and Thrombectomy in Acute Ischemic Stroke",
+          "authors": [
+            "Jolugbo P",
+            "Ariëns RAS"
+          ],
+          "journal": "Stroke",
+          "year": 2021,
+          "doi": "10.1161/STROKEAHA.120.032810",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/33563020/"
+        },
+        {
+          "pmid": "38686848",
+          "title": "Comprehensive Review of Tenecteplase for Thrombolysis in Acute Ischemic Stroke",
+          "authors": [
+            "Wang L",
+            "Hao M",
+            "Wu N",
+            "et al."
+          ],
+          "journal": "Journal of the American Heart Association",
+          "year": 2024,
+          "doi": "10.1161/JAHA.123.031692",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38686848/"
+        }
+      ]
+    },
+    {
+      "category": "Dermatology",
+      "query": "melanoma early diagnosis dermoscopy",
+      "articles": [
+        {
+          "pmid": "31135866",
+          "title": "Dermoscopy: A Review of the Structures That Facilitate Melanoma Detection",
+          "authors": [
+            "Marghoob NG",
+            "Liopyris K",
+            "Jaimes N"
+          ],
+          "journal": "The Journal of the American Osteopathic Association",
+          "year": 2019,
+          "doi": "10.7556/jaoa.2019.067",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/31135866/"
+        },
+        {
+          "pmid": "23046019",
+          "title": "Early diagnosis of melanoma: what is the impact of dermoscopy?",
+          "authors": [
+            "Argenziano G",
+            "Albertini G",
+            "Castagnetti F",
+            "et al."
+          ],
+          "journal": "Dermatologic therapy",
+          "year": 2012,
+          "doi": "10.1111/j.1529-8019.2012.01482.x",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/23046019/"
+        },
+        {
+          "pmid": "34648437",
+          "title": "Early Melanoma Diagnosis With Sequential Dermoscopic Images",
+          "authors": [
+            "Yu Z",
+            "Nguyen J",
+            "Nguyen TD",
+            "et al."
+          ],
+          "journal": "IEEE transactions on medical imaging",
+          "year": 2022,
+          "doi": "10.1109/TMI.2021.3120091",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/34648437/"
+        },
+        {
+          "pmid": "39700658",
+          "title": "European consensus-based interdisciplinary guideline for melanoma. Part 1: Diagnostics - Update 2024",
+          "authors": [
+            "Garbe C",
+            "Amaral T",
+            "Peris K",
+            "et al."
+          ],
+          "journal": "European journal of cancer (Oxford, England : 1990)",
+          "year": 2025,
+          "doi": "10.1016/j.ejca.2024.115152",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/39700658/"
+        },
+        {
+          "pmid": "37869805",
+          "title": "Challenges in Early Diagnosis of Melanoma Using Tele-Dermatology",
+          "authors": [
+            "Gudiu AV",
+            "Stoicu-Tivadar L"
+          ],
+          "journal": "Studies in health technology and informatics",
+          "year": 2023,
+          "doi": "10.3233/SHTI230738",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/37869805/"
+        },
+        {
+          "pmid": "32455486",
+          "title": "Dermoscopy comparative approach for early diagnosis in familial melanoma: influence of MC1R genotype",
+          "authors": [
+            "Longo C",
+            "Barquet V",
+            "Hernandez E",
+            "et al."
+          ],
+          "journal": "Journal of the European Academy of Dermatology and Venereology : JEADV",
+          "year": 2021,
+          "doi": "10.1111/jdv.16679",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/32455486/"
+        }
+      ]
+    },
+    {
+      "category": "Neurology",
+      "query": "migraine prophylaxis treatment",
+      "articles": [
+        {
+          "pmid": "40378325",
+          "title": "Migraine Headache Prophylaxis",
+          "authors": [
+            "Moreland P",
+            "Gaffney B",
+            "Lanham JS"
+          ],
+          "journal": "American family physician",
+          "year": 2025,
+          "url": "https://pubmed.ncbi.nlm.nih.gov/40378325/"
+        },
+        {
+          "pmid": "30600979",
+          "title": "Migraine Headache Prophylaxis",
+          "authors": [
+            "Ha H",
+            "Gonzalez A"
+          ],
+          "journal": "American family physician",
+          "year": 2019,
+          "url": "https://pubmed.ncbi.nlm.nih.gov/30600979/"
+        },
+        {
+          "pmid": "15070571",
+          "title": "Migraine",
+          "authors": [
+            "Silberstein SD"
+          ],
+          "journal": "Lancet (London, England)",
+          "year": 2004,
+          "doi": "10.1016/S0140-6736(04)15440-8",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/15070571/"
+        },
+        {
+          "pmid": "39639191",
+          "title": "Combining treatments for migraine prophylaxis: the state-of-the-art",
+          "authors": [
+            "Pellesi L",
+            "Garcia-Azorin D",
+            "Rubio-Beltrán E",
+            "et al."
+          ],
+          "journal": "The journal of headache and pain",
+          "year": 2024,
+          "doi": "10.1186/s10194-024-01925-w",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/39639191/"
+        },
+        {
+          "pmid": "31435770",
+          "title": "Acupuncture versus propranolol in migraine prophylaxis: an indirect treatment comparison meta-analysis",
+          "authors": [
+            "Chen YY",
+            "Li J",
+            "Chen M",
+            "et al."
+          ],
+          "journal": "Journal of neurology",
+          "year": 2020,
+          "doi": "10.1007/s00415-019-09510-x",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/31435770/"
+        },
+        {
+          "pmid": "34160823",
+          "title": "The American Headache Society Consensus Statement: Update on integrating new migraine treatments into clinical practice",
+          "authors": [
+            "Ailani J",
+            "Burch RC",
+            "Robbins MS",
+            "et al."
+          ],
+          "journal": "Headache",
+          "year": 2021,
+          "doi": "10.1111/head.14153",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/34160823/"
+        }
+      ]
+    },
+    {
+      "category": "Rare disease",
+      "query": "rare disease diagnostic delay",
+      "articles": [
+        {
+          "pmid": "33901419",
+          "title": "Histiocytosis",
+          "authors": [
+            "Emile JF",
+            "Cohen-Aubart F",
+            "Collin M",
+            "et al."
+          ],
+          "journal": "Lancet (London, England)",
+          "year": 2021,
+          "doi": "10.1016/S0140-6736(21)00311-1",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/33901419/"
+        },
+        {
+          "pmid": "41708847",
+          "title": "An agentic system for rare disease diagnosis with traceable reasoning",
+          "authors": [
+            "Zhao W",
+            "Wu C",
+            "Fan Y",
+            "et al."
+          ],
+          "journal": "Nature",
+          "year": 2026,
+          "doi": "10.1038/s41586-025-10097-9",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/41708847/"
+        },
+        {
+          "pmid": "35001905",
+          "title": "[Diagnostic delay in rare diseases: systematic review.]",
+          "authors": [
+            "Berrocal-Acedo M",
+            "Benito-Lozano J",
+            "Alonso-Ferreira V",
+            "et al."
+          ],
+          "journal": "Revista espanola de salud publica",
+          "year": 2022,
+          "url": "https://pubmed.ncbi.nlm.nih.gov/35001905/"
+        },
+        {
+          "pmid": "36703223",
+          "title": "The genomic landscape of rare disorders in the Middle East",
+          "authors": [
+            "El Naofal M",
+            "Ramaswamy S",
+            "Alsarhan A",
+            "et al."
+          ],
+          "journal": "Genome medicine",
+          "year": 2023,
+          "doi": "10.1186/s13073-023-01157-8",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/36703223/"
+        },
+        {
+          "pmid": "36753356",
+          "title": "Diagnostic delay in rare diseases",
+          "authors": [
+            "Aguerre V"
+          ],
+          "journal": "Archivos argentinos de pediatria",
+          "year": 2023,
+          "doi": "10.5546/aap.2022-02946.eng",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/36753356/"
+        },
+        {
+          "pmid": "39486422",
+          "title": "Identification of red flags for IgG4-related disease: an international European Reference Network for Rare Connective Tissue Diseases framework",
+          "authors": [
+            "Della-Torre E",
+            "Talarico R",
+            "Ballarin J",
+            "et al."
+          ],
+          "journal": "The Lancet. Rheumatology",
+          "year": 2025,
+          "doi": "10.1016/S2665-9913(24)00192-9",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/39486422/"
+        }
+      ]
+    },
+    {
+      "category": "Emergency",
+      "query": "pulmonary embolism diagnosis Wells score",
+      "articles": [
+        {
+          "pmid": "33984268",
+          "title": "Venous thromboembolism",
+          "authors": [
+            "Khan F",
+            "Tritschler T",
+            "Kahn SR",
+            "et al."
+          ],
+          "journal": "Lancet (London, England)",
+          "year": 2021,
+          "doi": "10.1016/S0140-6736(20)32658-1",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/33984268/"
+        },
+        {
+          "pmid": "29101916",
+          "title": "Pulmonary embolism An update",
+          "authors": [
+            "Doherty S"
+          ],
+          "journal": "Australian family physician",
+          "year": 2017,
+          "url": "https://pubmed.ncbi.nlm.nih.gov/29101916/"
+        },
+        {
+          "pmid": "36157092",
+          "title": "Pathophysiology and Management of Pulmonary Embolism",
+          "authors": [
+            "Shah IK",
+            "Merfeld JM",
+            "Chun J",
+            "et al."
+          ],
+          "journal": "The International journal of angiology : official publication of the International College of Angiology, Inc",
+          "year": 2022,
+          "doi": "10.1055/s-0042-1756204",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/36157092/"
+        },
+        {
+          "pmid": "37953212",
+          "title": "The Legend score synthesizes Wells, PERC, Geneva, D-dimer and predicts acute pulmonary embolism prior to imaging tests",
+          "authors": [
+            "Zhao Y",
+            "Cheng Y",
+            "Wang H",
+            "et al."
+          ],
+          "journal": "Pulmonology",
+          "year": 2025,
+          "doi": "10.1016/j.pulmoe.2023.10.002",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/37953212/"
+        },
+        {
+          "pmid": "30100375",
+          "title": "Mogamulizumab versus vorinostat in previously treated cutaneous T-cell lymphoma (MAVORIC): an international, open-label, randomised, controlled phase 3 trial",
+          "authors": [
+            "Kim YH",
+            "Bagot M",
+            "Pinter-Brown L",
+            "et al."
+          ],
+          "journal": "The Lancet. Oncology",
+          "year": 2018,
+          "doi": "10.1016/S1470-2045(18)30379-6",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/30100375/"
+        },
+        {
+          "pmid": "24643601",
+          "title": "Age-adjusted D-dimer cutoff levels to rule out pulmonary embolism: the ADJUST-PE study",
+          "authors": [
+            "Righini M",
+            "Van Es J",
+            "Den Exter PL",
+            "et al."
+          ],
+          "journal": "JAMA",
+          "year": 2014,
+          "doi": "10.1001/jama.2014.2135",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/24643601/"
+        }
+      ]
+    },
+    {
+      "category": "Decision support",
+      "query": "clinical decision support artificial intelligence safety",
+      "articles": [
+        {
+          "pmid": "39505413",
+          "title": "Artificial Intelligence in Cardiovascular Clinical Trials",
+          "authors": [
+            "Cunningham JW",
+            "Abraham WT",
+            "Bhatt AS",
+            "et al."
+          ],
+          "journal": "Journal of the American College of Cardiology",
+          "year": 2024,
+          "doi": "10.1016/j.jacc.2024.08.069",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/39505413/"
+        },
+        {
+          "pmid": "35584845",
+          "title": "Reporting guideline for the early stage clinical evaluation of decision support systems driven by artificial intelligence: DECIDE-AI",
+          "authors": [
+            "Vasey B",
+            "Nagendran M",
+            "Campbell B",
+            "et al."
+          ],
+          "journal": "BMJ (Clinical research ed.)",
+          "year": 2022,
+          "doi": "10.1136/bmj-2022-070904",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/35584845/"
+        },
+        {
+          "pmid": "38641410",
+          "title": "The use of artificial intelligence to optimize medication alerts generated by clinical decision support systems: a scoping review",
+          "authors": [
+            "Graafsma J",
+            "Murphy RM",
+            "van de Garde EMW",
+            "et al."
+          ],
+          "journal": "Journal of the American Medical Informatics Association : JAMIA",
+          "year": 2024,
+          "doi": "10.1093/jamia/ocae076",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38641410/"
+        },
+        {
+          "pmid": "31492414",
+          "title": "Artificial Intelligence and Clinical Decision Support for Radiologists and Referring Providers",
+          "authors": [
+            "Bizzo BC",
+            "Almeida RR",
+            "Michalski MH",
+            "et al."
+          ],
+          "journal": "Journal of the American College of Radiology : JACR",
+          "year": 2019,
+          "doi": "10.1016/j.jacr.2019.06.010",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/31492414/"
+        },
+        {
+          "pmid": "40225652",
+          "title": "Applications of Artificial Intelligence in Nursing Care: A Systematic Review",
+          "authors": [
+            "Martinez-Ortigosa A",
+            "Martinez-Granados A",
+            "Gil-Hernández E",
+            "et al."
+          ],
+          "journal": "Journal of nursing management",
+          "year": 2023,
+          "doi": "10.1155/2023/3219127",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/40225652/"
+        },
+        {
+          "pmid": "40752955",
+          "title": "Artificial Intelligence in Perioperative Medication-Related Clinical Decision Support",
+          "authors": [
+            "Patel M",
+            "Nanji KC"
+          ],
+          "journal": "Anesthesiology clinics",
+          "year": 2025,
+          "doi": "10.1016/j.anclin.2025.05.009",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/40752955/"
+        }
+      ]
+    }
+  ]
+}
