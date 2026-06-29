@@ -38,8 +38,16 @@ verified, retrieved conditions, and any output that can't be traced to a stored 
   open-licensed reference images for side-by-side comparison.
 - **Staff encyclopedia lookup** — free-text search across **11,000+ verified conditions** by name,
   ICD-10 or symptom, with citations, treatments and reference images.
-- **Embeddable pre-triage widget** — a patient-facing widget a clinic embeds on its own website
-  (`/widget`), returning a safe disposition (urgent / book / self-care). Never diagnoses a patient.
+- **Embeddable, multilingual pre-triage widget** — a patient-facing widget a clinic embeds on its
+  own website (`/widget`), returning a safe disposition (urgent / book / self-care). Available in
+  **English, Spanish, Chinese and French** (NVIDIA `riva-translate-4b`): patient input is translated
+  to English for matching and the guidance is translated back. Never diagnoses a patient.
+- **Patient records** — clinic-held patient records with each patient's linked assessment history
+  (`/patients`). The AI engine only ever receives a pseudonymous reference, never the identity.
+- **Evidence library** — `/research` surfaces real, current literature pulled from **PubMed (NCBI)**
+  across the conditions the knowledge base tracks.
+- **Teaching depth** — high-yield conditions carry AMBOSS-style pathophysiology, key investigations
+  and learning points, so clinicians and students can learn from each entry.
 - **Live audit dashboard** — reads the DynamoDB audit trail (assessment count, consensus rate,
   average confidence, recent assessments).
 
@@ -47,7 +55,7 @@ verified, retrieved conditions, and any output that can't be traced to a stored 
 
 | Tier | Count | Source |
 |------|-------|--------|
-| Curated | 109 | Guideline-cited (NICE/ESC/IDSA/ADA/GOLD/KDIGO/WHO/AHA + NICE CKS) — with treatments & red flags |
+| Curated | 109 | Guideline-cited (NICE/ESC/IDSA/ADA/GOLD/KDIGO/WHO/AHA + NICE CKS / NHS / DermNet) — with treatments & red flags |
 | Visible / dermatology | 25 | DermNet-cited, with open-licensed reference images |
 | Rare diseases | ~10,000 | HPO / OMIM / Orphanet |
 | Common NIH topics | ~1,000 | MedlinePlus |
@@ -105,8 +113,16 @@ npm run seed-db           # seed curated conditions
 npm run import-common     # + common primary-care conditions
 npm run import-extended   # + multi-specialty conditions
 npm run import-visual     # + visible conditions with reference images
+npm run import-teaching   # + AMBOSS-style depth on high-yield conditions
+npm run apply-citations   # correct any known-broken citation URLs (canonical patch)
 npm run export-snapshot   # write data/conditions.json bundled into the deploy
+
+npm run check-citations   # audit: ping every hand-authored citation URL
+npm run fetch-pubmed      # refresh data/research.json from PubMed (needs NCBI key)
 ```
+
+Every citation in the curated/visual tiers is link-checked by `check-citations`; the
+templated ontology URLs (OMIM/Orphanet/MedlinePlus/DECIPHER) are generated from real IDs.
 
 ## Honest scope
 
