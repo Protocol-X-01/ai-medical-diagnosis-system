@@ -174,12 +174,20 @@ export default function DiagnosePage() {
             </section>
 
             <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-              <h3 className="mb-3 text-sm font-semibold text-slate-900">Vitals &amp; context <span className="font-normal text-slate-400">(optional)</span></h3>
+              <div className="mb-3 flex items-center justify-between">
+                <h3 className="text-sm font-semibold text-slate-900">Vitals &amp; context <span className="font-normal text-slate-400">(optional)</span></h3>
+                <button
+                  type="button"
+                  onClick={() => setVitals({ temperature: '37.0', bloodPressure: '120/80', heartRate: '72', respiratoryRate: '16', oxygenSaturation: '98' })}
+                  className="rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-medium text-emerald-700 ring-1 ring-inset ring-emerald-100 hover:bg-emerald-100"
+                  title="Fill the normal adult reference values"
+                >Normal vitals</button>
+              </div>
               <div className="grid grid-cols-2 gap-3">
-                {([['temperature', 'Temp'], ['bloodPressure', 'BP'], ['heartRate', 'HR (bpm)'], ['respiratoryRate', 'Resp rate'], ['oxygenSaturation', 'SpO₂ %']] as const).map(([k, lbl]) => (
+                {([['temperature', 'Temp (°C)', '37.0'], ['bloodPressure', 'BP (mmHg)', '120/80'], ['heartRate', 'HR (bpm)', '72'], ['respiratoryRate', 'Resp rate', '16'], ['oxygenSaturation', 'SpO₂ %', '98']] as const).map(([k, lbl, ph]) => (
                   <div key={k}>
                     <label className="mb-1 block text-xs text-slate-500">{lbl}</label>
-                    <input value={vitals[k]} onChange={(e) => setVitals({ ...vitals, [k]: e.target.value })} className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30 focus:outline-none" />
+                    <input value={vitals[k]} onChange={(e) => setVitals({ ...vitals, [k]: e.target.value })} placeholder={ph} className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30 focus:outline-none" />
                   </div>
                 ))}
                 <div>
