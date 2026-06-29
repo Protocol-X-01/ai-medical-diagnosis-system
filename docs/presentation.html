@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Medical Diagnosis — Technical Architecture</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/theme/black.min.css" id="theme" />
+  <style>
+    :root {
+      --teal: #14b8a6; --blue: #3b82f6; --slate: #94a3b8; --ink: #e2e8f0;
+    }
+    .reveal { font-family: "Inter", system-ui, -apple-system, sans-serif; color: var(--ink); }
+    .reveal h1, .reveal h2, .reveal h3 { color: #fff; font-weight: 700; letter-spacing: -0.02em; text-transform: none; }
+    .reveal h1 { font-size: 2.1em; }
+    .reveal h2 { font-size: 1.5em; }
+    .reveal .accent { color: var(--teal); }
+    .reveal .blue { color: var(--blue); }
+    .reveal section { text-align: left; }
+    .reveal .center { text-align: center; }
+    .reveal p, .reveal li { font-size: 0.72em; line-height: 1.45; color: var(--ink); }
+    .reveal .small li, .reveal .small p { font-size: 0.62em; }
+    .reveal strong { color: #fff; }
+    .reveal .pill { display: inline-block; background: rgba(20,184,166,.15); color: var(--teal);
+      border: 1px solid rgba(20,184,166,.35); border-radius: 999px; padding: 2px 12px; font-size: 0.5em;
+      letter-spacing: .08em; text-transform: uppercase; margin-bottom: .6em; }
+    .reveal table { font-size: 0.6em; }
+    .reveal table th { color: var(--teal); border-bottom: 1px solid rgba(148,163,184,.4); }
+    .reveal table td { border: none; padding: .35em .7em; }
+    .reveal .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2em; align-items: start; }
+    .reveal .card { background: rgba(148,163,184,.08); border: 1px solid rgba(148,163,184,.18);
+      border-radius: 14px; padding: .9em 1.1em; }
+    .reveal .flow { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 0.52em;
+      background: rgba(2,6,23,.6); border: 1px solid rgba(148,163,184,.2); border-radius: 12px;
+      padding: 1em 1.2em; line-height: 1.9; color: var(--slate); }
+    .reveal .flow b { color: var(--teal); }
+    .reveal .flow .w { color: var(--blue); }
+    .reveal .muted { color: var(--slate); font-size: 0.62em; }
+    .reveal img.arch { background: #fff; border-radius: 12px; padding: 14px; max-height: 540px; }
+    .reveal .kpi { font-size: 1.6em; color: var(--teal); font-weight: 700; }
+    .reveal .footer { position: fixed; bottom: 12px; right: 18px; font-size: 12px; color: var(--slate); }
+  </style>
+</head>
+<body>
+<div class="reveal"><div class="slides">
+
+  <!-- 1. Title -->
+  <section class="center" data-background-gradient="radial-gradient(circle at 50% 40%, #0f2a2e, #020617)">
+    <span class="pill">H0 · Hack the Zero Stack — Track 2 (B2B)</span>
+    <h1>AI Medical Diagnosis</h1>
+    <h3 class="accent" style="font-weight:500;">Hallucination-Resistant Clinical Decision Support</h3>
+    <p class="muted" style="margin-top:1.4em;">Technical Architecture &amp; Stack</p>
+    <p class="muted">Vercel · Amazon DynamoDB · NVIDIA NIM</p>
+  </section>
+
+  <!-- 2. Problem -->
+  <section>
+    <span class="pill">The problem</span>
+    <h2>Clinicians won't trust an AI that makes things up</h2>
+    <ul>
+      <li>LLMs hallucinate — they invent plausible-sounding conditions, drugs and citations.</li>
+      <li>In medicine that isn't a quirk, it's a <strong>safety and liability blocker</strong>.</li>
+      <li>So we built a generative system that <strong class="accent">can't present anything it can't cite</strong>.</li>
+    </ul>
+    <div class="card" style="margin-top:1em;">
+      <p style="margin:0;">Sold <strong>B2B</strong> to provider organisations — the client is the clinic, <em>not</em> the patient. It sits <strong class="accent">behind the front desk</strong>, relieving pressure at initial contact and letting staff query a cited encyclopedia while they assess.</p>
+    </div>
+  </section>
+
+  <!-- 3. Architecture diagram -->
+  <section class="center">
+    <span class="pill">Architecture</span>
+    <h2 style="margin-bottom:.4em;">Every request: read-grounded, write-audited</h2>
+    <img class="arch" src="architecture-diagram.svg" alt="System architecture" />
+  </section>
+
+  <!-- 4. Request flow -->
+  <section>
+    <span class="pill">Request lifecycle</span>
+    <h2>What happens on one assessment</h2>
+    <div class="flow">
+      Clinician → <b>Vercel</b> (Next.js 16 <span class="w">/api/diagnose</span>)<br/>
+      &nbsp;&nbsp;1. retrieve grounded candidates &nbsp;←&nbsp; <b>DynamoDB</b> (read)<br/>
+      &nbsp;&nbsp;2. optional image → <b>NIM vision</b> extracts visible features<br/>
+      &nbsp;&nbsp;3. 3 independent <b>NIM</b> voters reason <span class="w">only</span> over those candidates<br/>
+      &nbsp;&nbsp;4. weighted <b>2-of-3 consensus</b> + citation-integrity filter<br/>
+      &nbsp;&nbsp;5. content-safety model screens the narrative<br/>
+      &nbsp;&nbsp;6. persist consensus + votes + citations &nbsp;→&nbsp; <b>DynamoDB</b> (write)<br/>
+      → response: diagnosis · confidence · cited sources · treatments
+    </div>
+    <p class="muted">No separate backend — the whole pipeline runs as Vercel serverless functions.</p>
+  </section>
+
+  <!-- 5. Quorum engine -->
+  <section>
+    <span class="pill">The engine</span>
+    <h2>A multi-model quorum, not a single wrapper</h2>
+    <div class="cols">
+      <div class="card">
+        <h3 class="accent" style="font-size:.8em;">Three independent voters</h3>
+        <ul class="small">
+          <li>NVIDIA <strong>Nemotron-3 Super 120B</strong></li>
+          <li>Meta <strong>Llama 3.3 70B</strong></li>
+          <li>Mistral <strong>Nemotron</strong></li>
+        </ul>
+        <p class="muted">Different model families → genuine vote independence.</p>
+      </div>
+      <div class="card">
+        <h3 class="accent" style="font-size:.8em;">How a verdict is earned</h3>
+        <ul class="small">
+          <li><strong>Weighted</strong>: trust × confidence × retrieval match</li>
+          <li><strong>2-of-3</strong> agreement required</li>
+          <li><strong>Citation integrity</strong>: a source a model invents is dropped; zero verified citations → withheld</li>
+          <li><strong>Contested flag</strong>: a near-tie is surfaced, not hidden</li>
+        </ul>
+      </div>
+    </div>
+    <p class="muted">Ambiguous? We present <strong>ranked options</strong> from real votes — never a black-box guess.</p>
+  </section>
+
+  <!-- 6. DynamoDB -->
+  <section>
+    <span class="pill">AWS database</span>
+    <h2>DynamoDB on the critical path of <span class="accent">every</span> request</h2>
+    <div class="cols">
+      <div class="card">
+        <h3 class="blue" style="font-size:.8em;">Read — grounding</h3>
+        <p class="muted"><code>MedicalConditions</code> holds the verified encyclopedia. The quorum may only reason within retrieved candidates and only cite their sources.</p>
+      </div>
+      <div class="card">
+        <h3 class="blue" style="font-size:.8em;">Write — audit</h3>
+        <p class="muted"><code>Diagnoses</code> stores every consensus, vote, citation &amp; safety verdict. The live dashboard reads it back.</p>
+      </div>
+    </div>
+    <p style="margin-top:.8em;"><strong>Operational tables:</strong> <code>Patients</code> (records + linked assessments via a pseudonymous ref) · <code>Signups</code> (trial requests).</p>
+    <p class="muted">Serverless &amp; on-demand: connects cleanly from Vercel with no VPC / pool overhead, scales with zero capacity planning. A deploy-time snapshot keeps cold starts fast; DynamoDB stays the system of record.</p>
+  </section>
+
+  <!-- 7. Data tiers -->
+  <section>
+    <span class="pill">Knowledge base</span>
+    <h2><span class="accent">11,339</span> conditions, tiered &amp; cited</h2>
+    <table>
+      <thead><tr><th>Tier</th><th>Count</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td>Curated</td><td>109</td><td>NICE / ESC / IDSA / ADA / GOLD / KDIGO / WHO / AHA · NICE CKS / NHS</td></tr>
+        <tr><td>Visible / dermatology</td><td>25</td><td>DermNet-cited, open-licensed reference images</td></tr>
+        <tr><td>Rare diseases</td><td>~10,000</td><td>HPO / OMIM / Orphanet</td></tr>
+        <tr><td>Common NIH topics</td><td>~1,000</td><td>MedlinePlus</td></tr>
+      </tbody>
+    </table>
+    <p class="muted" style="margin-top:.7em;">A <strong>commonality prior</strong> ranks everyday conditions ahead of rare ones on equal overlap. High-yield entries carry <strong>AMBOSS-style depth</strong> (pathophysiology, investigations, learning points). Every hand-authored citation URL is <strong>link-checked</strong>.</p>
+  </section>
+
+  <!-- 8. The stack -->
+  <section>
+    <span class="pill">The stack</span>
+    <h2>Zero-ops, serverless, model-agnostic</h2>
+    <div class="cols">
+      <div class="card">
+        <h3 class="accent" style="font-size:.8em;">Frontend &amp; API</h3>
+        <ul class="small">
+          <li><strong>Next.js 16</strong> (App Router, route handlers)</li>
+          <li><strong>React 19</strong> · <strong>Tailwind v4</strong> · TypeScript</li>
+          <li>Deployed on <strong>Vercel</strong> (serverless functions)</li>
+        </ul>
+        <h3 class="accent" style="font-size:.8em; margin-top:.6em;">Database</h3>
+        <ul class="small"><li>Amazon <strong>DynamoDB</strong> (AWS SDK v3, on-demand, us-east-1)</li></ul>
+      </div>
+      <div class="card">
+        <h3 class="accent" style="font-size:.8em;">AI — NVIDIA NIM (OpenAI-compatible)</h3>
+        <ul class="small">
+          <li>3 quorum LLMs (Nemotron 120B, Llama 70B, Mistral)</li>
+          <li>1 <strong>content-safety</strong> model</li>
+          <li>1 <strong>vision</strong> model (visual differential)</li>
+          <li><strong>riva-translate-4b</strong> — EN / ES / 中文 / FR</li>
+        </ul>
+        <p class="muted">Plain <code>fetch</code> client, no SDK lock-in — swap or add a model in one line.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. Beyond the core -->
+  <section>
+    <span class="pill">Product surface</span>
+    <h2>More than a model call</h2>
+    <ul>
+      <li><strong>Visual differential</strong> — a vision model extracts <em>visible features</em> from an image (assistive, not a diagnostic read) → look-alike conditions with reference images.</li>
+      <li><strong>Embeddable, multilingual pre-triage widget</strong> — clinics drop it on their own site; safe disposition in 4 languages via riva-translate (the NY client base is multilingual).</li>
+      <li><strong>Staff encyclopedia lookup</strong> · <strong>patient records</strong> · <strong>live audit dashboard</strong> · <strong>PubMed evidence library</strong>.</li>
+    </ul>
+  </section>
+
+  <!-- 10. Reliability & honesty -->
+  <section>
+    <span class="pill">Reliability &amp; integrity</span>
+    <h2>Engineered to fail safe</h2>
+    <ul>
+      <li><strong>Transient-error retry</strong> on NIM calls — one upstream blip no longer abstains a voter.</li>
+      <li><strong>Honest degradation</strong> — if the models can't return usable votes, we say so; we never dress up retrieval scores as a verdict.</li>
+      <li><strong>Citation integrity</strong> — invented sources dropped; ungroundable output withheld.</li>
+      <li class="accent"><strong>Decision support, not a diagnosis</strong> — de-identified inputs by design; pre-certification compliance posture.</li>
+    </ul>
+  </section>
+
+  <!-- 11. Roadmap -->
+  <section>
+    <span class="pill">Roadmap</span>
+    <h2>Built to extend onto AWS healthcare</h2>
+    <table>
+      <tbody>
+        <tr><td><strong>Patient engagement</strong></td><td>Amazon Connect + EHR → widget into a contact flow</td></tr>
+        <tr><td><strong>Identity</strong></td><td>Connect Voice ID / Cognito → verify before linking a record</td></tr>
+        <tr><td><strong>Scheduling</strong></td><td>Connect + Lambda → real calendar slots</td></tr>
+        <tr><td><strong>Ambient docs</strong></td><td>AWS HealthScribe → visit notes seeded by the cited assessment</td></tr>
+        <tr><td><strong>Coding</strong></td><td>Comprehend Medical → ICD-10 / CPT (encyclopedia already ICD-10-indexed)</td></tr>
+        <tr><td><strong>Insights</strong></td><td>HealthLake + QuickSight → population dashboards from the audit trail</td></tr>
+      </tbody>
+    </table>
+    <p class="muted">Plus: Claude as a live quorum voter · OpenSearch vector retrieval · PHI on HealthLake under a BAA · SOC 2 / HIPAA.</p>
+  </section>
+
+  <!-- 12. Close -->
+  <section class="center" data-background-gradient="radial-gradient(circle at 50% 40%, #0f2a2e, #020617)">
+    <h2 class="accent">Grounded. Auditable. Honest.</h2>
+    <p>A quorum of independent models that must agree — grounded in cited sources on AWS DynamoDB, deployed on Vercel.</p>
+    <p class="muted" style="margin-top:1.2em;">ai-medical-diagnosis-dusky.vercel.app</p>
+    <p class="muted">Built on Vercel · Amazon DynamoDB · NVIDIA NIM</p>
+  </section>
+
+</div></div>
+<div class="footer">AI Medical Diagnosis — Technical Architecture</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.js"></script>
+<script>
+  Reveal.initialize({ hash: true, slideNumber: 'c/t', transition: 'slide', width: 1280, height: 720, margin: 0.06 });
+</script>
+</body>
+</html>
