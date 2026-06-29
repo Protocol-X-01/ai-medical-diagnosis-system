@@ -59,8 +59,8 @@ const voterLabel = (role: string, model: string) => `${role} (${prettyModel(mode
 // Three independent voter slots, each a fallback chain across model families so the
 // quorum stays available even when NIM degrades a specific model.
 export const QUORUM_VOTERS: VoterConfig[] = [
-  { role: 'Reasoning', models: ['nvidia/nemotron-3-super-120b-a12b', 'meta/llama-3.1-70b-instruct'], trust: 1.1 },
-  { role: 'Diagnostic', models: ['meta/llama-3.3-70b-instruct', 'meta/llama-3.1-70b-instruct'], trust: 1.0 },
+  { role: 'Reasoning', models: ['nvidia/nemotron-3-super-120b-a12b', 'meta/llama-3.1-70b-instruct', 'meta/llama-3.1-8b-instruct'], trust: 1.1 },
+  { role: 'Diagnostic', models: ['meta/llama-3.3-70b-instruct', 'meta/llama-3.1-70b-instruct', 'meta/llama-3.1-8b-instruct'], trust: 1.0 },
   { role: 'Cross-check', models: ['mistralai/mixtral-8x7b-instruct-v0.1', 'qwen/qwen2.5-7b-instruct', 'meta/llama-3.1-8b-instruct'], trust: 1.0 },
 ]
 
