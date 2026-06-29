@@ -13,7 +13,8 @@
     "import-mplus": "tsx scripts/import-medlineplus.ts",
     "export-snapshot": "tsx scripts/export-snapshot.ts",
     "import-visual": "tsx scripts/import-visual-conditions.ts",
-    "import-common": "tsx scripts/import-common-conditions.ts"
+    "import-common": "tsx scripts/import-common-conditions.ts",
+    "import-extended": "tsx scripts/import-extended-conditions.ts"
   },
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.700.0",
