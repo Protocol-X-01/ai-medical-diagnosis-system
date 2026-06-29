@@ -1,0 +1,29 @@
+{
+  "condition": {
+    "name": "Schizophrenia",
+    "icd10Code": "F20",
+    "category": "Psychiatry",
+    "symptoms": [
+      "hallucinations",
+      "delusions",
+      "disorganized thinking",
+      "negative symptoms"
+    ],
+    "causes": [
+      "genetics",
+      "brain chemistry",
+      "environmental factors"
+    ],
+    "treatments": [
+      "antipsychotics",
+      "psychotherapy",
+      "social support"
+    ],
+    "sources": []
+  },
+  "researchPapers": [],
+  "clinicalGuidelines": [],
+  "trustedSources": [],
+  "totalSources": 0,
+  "lastUpdated": "2026-05-28T08:42:21.924Z"
+}

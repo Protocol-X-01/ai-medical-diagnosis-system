@@ -1,0 +1,30 @@
+{
+  "condition": {
+    "name": "Asthma",
+    "icd10Code": "J45",
+    "category": "Pulmonology",
+    "symptoms": [
+      "wheezing",
+      "shortness of breath",
+      "chest tightness",
+      "cough"
+    ],
+    "causes": [
+      "allergens",
+      "exercise",
+      "cold air",
+      "stress"
+    ],
+    "treatments": [
+      "inhaled corticosteroids",
+      "bronchodilators",
+      "leukotriene modifiers"
+    ],
+    "sources": []
+  },
+  "researchPapers": [],
+  "clinicalGuidelines": [],
+  "trustedSources": [],
+  "totalSources": 0,
+  "lastUpdated": "2026-05-28T08:41:14.935Z"
+}

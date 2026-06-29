@@ -1,0 +1,31 @@
+{
+  "condition": {
+    "name": "Generalized Anxiety Disorder",
+    "icd10Code": "F41.1",
+    "category": "Psychiatry",
+    "symptoms": [
+      "excessive worry",
+      "restlessness",
+      "fatigue",
+      "difficulty concentrating"
+    ],
+    "causes": [
+      "genetics",
+      "brain chemistry",
+      "personality",
+      "life experiences"
+    ],
+    "treatments": [
+      "SSRIs",
+      "SNRIs",
+      "psychotherapy",
+      "lifestyle changes"
+    ],
+    "sources": []
+  },
+  "researchPapers": [],
+  "clinicalGuidelines": [],
+  "trustedSources": [],
+  "totalSources": 0,
+  "lastUpdated": "2026-05-28T08:42:19.155Z"
+}

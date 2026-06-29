@@ -1,0 +1,29 @@
+{
+  "condition": {
+    "name": "Melanoma",
+    "icd10Code": "C43",
+    "category": "Dermatology",
+    "symptoms": [
+      "new mole",
+      "changing mole",
+      "irregular borders",
+      "color variation"
+    ],
+    "causes": [
+      "UV exposure",
+      "genetics",
+      "fair skin"
+    ],
+    "treatments": [
+      "surgical excision",
+      "immunotherapy",
+      "targeted therapy"
+    ],
+    "sources": []
+  },
+  "researchPapers": [],
+  "clinicalGuidelines": [],
+  "trustedSources": [],
+  "totalSources": 0,
+  "lastUpdated": "2026-05-28T08:42:13.746Z"
+}

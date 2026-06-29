@@ -1,0 +1,30 @@
+{
+  "condition": {
+    "name": "Pneumonia",
+    "icd10Code": "J18",
+    "category": "Pulmonology",
+    "symptoms": [
+      "fever",
+      "cough",
+      "chest pain",
+      "shortness of breath"
+    ],
+    "causes": [
+      "bacteria",
+      "viruses",
+      "fungi",
+      "aspiration"
+    ],
+    "treatments": [
+      "antibiotics",
+      "antivirals",
+      "supportive care"
+    ],
+    "sources": []
+  },
+  "researchPapers": [],
+  "clinicalGuidelines": [],
+  "trustedSources": [],
+  "totalSources": 0,
+  "lastUpdated": "2026-05-28T08:41:17.650Z"
+}

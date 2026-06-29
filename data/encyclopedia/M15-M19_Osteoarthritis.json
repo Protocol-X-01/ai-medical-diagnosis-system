@@ -1,0 +1,30 @@
+{
+  "condition": {
+    "name": "Osteoarthritis",
+    "icd10Code": "M15-M19",
+    "category": "Rheumatology",
+    "symptoms": [
+      "joint pain",
+      "stiffness",
+      "reduced range of motion"
+    ],
+    "causes": [
+      "age",
+      "obesity",
+      "joint injury",
+      "genetics"
+    ],
+    "treatments": [
+      "NSAIDs",
+      "physical therapy",
+      "weight loss",
+      "joint replacement"
+    ],
+    "sources": []
+  },
+  "researchPapers": [],
+  "clinicalGuidelines": [],
+  "trustedSources": [],
+  "totalSources": 0,
+  "lastUpdated": "2026-05-28T08:42:00.005Z"
+}

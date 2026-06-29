@@ -1,0 +1,30 @@
+{
+  "condition": {
+    "name": "Anemia",
+    "icd10Code": "D50-D64",
+    "category": "Hematology",
+    "symptoms": [
+      "fatigue",
+      "weakness",
+      "pale skin",
+      "shortness of breath"
+    ],
+    "causes": [
+      "iron deficiency",
+      "vitamin deficiency",
+      "chronic disease",
+      "blood loss"
+    ],
+    "treatments": [
+      "iron supplementation",
+      "vitamin B12",
+      "treat underlying cause"
+    ],
+    "sources": []
+  },
+  "researchPapers": [],
+  "clinicalGuidelines": [],
+  "trustedSources": [],
+  "totalSources": 0,
+  "lastUpdated": "2026-05-28T08:42:24.631Z"
+}

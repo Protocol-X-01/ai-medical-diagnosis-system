@@ -1,0 +1,29 @@
+{
+  "condition": {
+    "name": "Parkinson Disease",
+    "icd10Code": "G20",
+    "category": "Neurology",
+    "symptoms": [
+      "tremor",
+      "rigidity",
+      "bradykinesia",
+      "postural instability"
+    ],
+    "causes": [
+      "dopamine deficiency",
+      "genetics",
+      "environmental factors"
+    ],
+    "treatments": [
+      "levodopa",
+      "dopamine agonists",
+      "MAO-B inhibitors"
+    ],
+    "sources": []
+  },
+  "researchPapers": [],
+  "clinicalGuidelines": [],
+  "trustedSources": [],
+  "totalSources": 0,
+  "lastUpdated": "2026-05-28T08:41:26.141Z"
+}

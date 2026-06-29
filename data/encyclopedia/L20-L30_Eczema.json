@@ -1,0 +1,29 @@
+{
+  "condition": {
+    "name": "Eczema",
+    "icd10Code": "L20-L30",
+    "category": "Dermatology",
+    "symptoms": [
+      "itching",
+      "red rash",
+      "dry skin",
+      "thickened skin"
+    ],
+    "causes": [
+      "genetics",
+      "immune system",
+      "environmental triggers"
+    ],
+    "treatments": [
+      "moisturizers",
+      "topical corticosteroids",
+      "antihistamines"
+    ],
+    "sources": []
+  },
+  "researchPapers": [],
+  "clinicalGuidelines": [],
+  "trustedSources": [],
+  "totalSources": 0,
+  "lastUpdated": "2026-05-28T08:42:10.994Z"
+}

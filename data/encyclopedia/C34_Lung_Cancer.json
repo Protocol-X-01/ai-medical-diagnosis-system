@@ -1,0 +1,31 @@
+{
+  "condition": {
+    "name": "Lung Cancer",
+    "icd10Code": "C34",
+    "category": "Oncology",
+    "symptoms": [
+      "persistent cough",
+      "chest pain",
+      "weight loss",
+      "hemoptysis"
+    ],
+    "causes": [
+      "smoking",
+      "radon exposure",
+      "asbestos",
+      "genetics"
+    ],
+    "treatments": [
+      "surgery",
+      "chemotherapy",
+      "radiation",
+      "targeted therapy"
+    ],
+    "sources": []
+  },
+  "researchPapers": [],
+  "clinicalGuidelines": [],
+  "trustedSources": [],
+  "totalSources": 0,
+  "lastUpdated": "2026-05-28T08:41:46.390Z"
+}

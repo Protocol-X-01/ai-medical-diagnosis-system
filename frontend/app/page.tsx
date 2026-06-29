@@ -9,17 +9,21 @@ export default function Home() {
         <div className="text-center max-w-4xl mx-auto">
           <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium mb-6">
             <Shield className="w-4 h-4" />
-            HIPAA Compliant • Zero Hallucinations
+            HIPAA-aligned design • Citation-grounded AI
           </div>
-          
+
           <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
-            AI Medical Diagnosis
-            <span className="block text-blue-600">Without Hallucinations</span>
+            From Common Complaints to Rare Disease
+            <span className="block text-blue-600">Grounded in Cited Evidence</span>
           </h1>
-          
+
           <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-            Revolutionary quorum-based AI system that guarantees accurate medical diagnoses 
-            backed by 35M+ verified medical sources. Built for healthcare providers who demand precision.
+            A multi-model quorum grounds every assessment in cited, verified sources across
+            <strong className="text-gray-800"> 11,000+ conditions</strong> — including 8,000+ rare
+            diseases where diagnosis often takes years. Built for medical teams at the point of
+            initial contact: relieve front-desk pressure, triage faster, and let staff query a
+            comprehensive cited encyclopedia while they assess. Decision support, not a replacement
+            for clinical judgement — outputs that cannot be traced to a source are withheld.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -42,20 +46,20 @@ export default function Home() {
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mt-16 max-w-5xl mx-auto">
           <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-            <div className="text-3xl font-bold text-blue-600 mb-2">99%+</div>
-            <div className="text-gray-600">Diagnostic Accuracy</div>
+            <div className="text-3xl font-bold text-blue-600 mb-2">11,000+</div>
+            <div className="text-gray-600">Conditions Covered</div>
           </div>
           <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-            <div className="text-3xl font-bold text-blue-600 mb-2">{'<30s'}</div>
-            <div className="text-gray-600">Average Response Time</div>
+            <div className="text-3xl font-bold text-blue-600 mb-2">8,000+</div>
+            <div className="text-gray-600">Rare Diseases</div>
           </div>
           <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-            <div className="text-3xl font-bold text-blue-600 mb-2">35M+</div>
-            <div className="text-gray-600">Medical Documents</div>
+            <div className="text-3xl font-bold text-blue-600 mb-2">100%</div>
+            <div className="text-gray-600">Source-Cited Outputs</div>
           </div>
           <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-            <div className="text-3xl font-bold text-blue-600 mb-2">0%</div>
-            <div className="text-gray-600">Hallucination Rate</div>
+            <div className="text-3xl font-bold text-blue-600 mb-2">2 of 3</div>
+            <div className="text-gray-600">Model Consensus Required</div>
           </div>
         </div>
       </div>
@@ -68,7 +72,7 @@ export default function Home() {
               How It Works
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Five specialized AI agents work together to ensure every diagnosis is accurate and verified
+              Three independent models reach consensus, grounded in verified citations, on every assessment
             </p>
           </div>
 
@@ -79,7 +83,7 @@ export default function Home() {
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-3">Quorum Consensus</h3>
               <p className="text-gray-600">
-                Five specialized agents analyze each case independently. 4 out of 5 must agree before presenting any diagnosis.
+                Three independent models analyze each case. A 2-of-3 consensus is required before any assessment is shown.
               </p>
             </div>
 
@@ -119,8 +123,8 @@ export default function Home() {
                   <div className="flex items-start gap-3">
                     <CheckCircle className="w-6 h-6 text-green-600 flex-shrink-0 mt-1" />
                     <div>
-                      <h3 className="font-semibold text-gray-900 mb-1">HIPAA Compliant</h3>
-                      <p className="text-gray-600">End-to-end encryption, audit logging, and comprehensive security measures</p>
+                      <h3 className="font-semibold text-gray-900 mb-1">HIPAA-aligned design</h3>
+                      <p className="text-gray-600">Encryption in transit, audit logging, and least-privilege access — formal certification on the roadmap</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
@@ -133,15 +137,15 @@ export default function Home() {
                   <div className="flex items-start gap-3">
                     <CheckCircle className="w-6 h-6 text-green-600 flex-shrink-0 mt-1" />
                     <div>
-                      <h3 className="font-semibold text-gray-900 mb-1">Continuous Learning</h3>
-                      <p className="text-gray-600">Knowledge base updated daily with latest medical research</p>
+                      <h3 className="font-semibold text-gray-900 mb-1">Curated Knowledge Base</h3>
+                      <p className="text-gray-600">Conditions anchored to authoritative guidelines (NICE, ESC, IDSA, WHO) with maintained citations</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
                     <CheckCircle className="w-6 h-6 text-green-600 flex-shrink-0 mt-1" />
                     <div>
-                      <h3 className="font-semibold text-gray-900 mb-1">Enterprise Ready</h3>
-                      <p className="text-gray-600">Scalable AWS infrastructure with 99.9% uptime SLA</p>
+                      <h3 className="font-semibold text-gray-900 mb-1">Cloud-Native</h3>
+                      <p className="text-gray-600">Serverless on Vercel + AWS DynamoDB — scales on demand, no infrastructure to manage</p>
                     </div>
                   </div>
                 </div>
@@ -150,7 +154,7 @@ export default function Home() {
               <div className="bg-gradient-to-br from-blue-600 to-blue-800 p-8 rounded-2xl text-white">
                 <h3 className="text-2xl font-bold mb-4">Ready to Get Started?</h3>
                 <p className="text-blue-100 mb-6">
-                  Join leading healthcare providers using AI-powered diagnosis with zero hallucinations.
+                  Citation-grounded clinical decision support — every assessment traceable to a verified source.
                 </p>
                 <div className="space-y-3 mb-6">
                   <div className="flex items-center gap-2">
@@ -159,7 +163,7 @@ export default function Home() {
                   </div>
                   <div className="flex items-center gap-2">
                     <Shield className="w-5 h-5" />
-                    <span>HIPAA compliant from day one</span>
+                    <span>HIPAA-aligned, privacy-by-design</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <CheckCircle className="w-5 h-5" />
@@ -186,7 +190,7 @@ export default function Home() {
             <div>
               <h3 className="font-bold text-lg mb-4">AI Medical Diagnosis</h3>
               <p className="text-gray-400 text-sm">
-                Zero-hallucination AI diagnosis system for healthcare providers.
+Citation-grounded AI clinical decision support for healthcare providers.
               </p>
             </div>
             <div>

@@ -1,0 +1,29 @@
+{
+  "condition": {
+    "name": "Cirrhosis",
+    "icd10Code": "K74",
+    "category": "Gastroenterology",
+    "symptoms": [
+      "fatigue",
+      "jaundice",
+      "ascites",
+      "confusion"
+    ],
+    "causes": [
+      "alcohol",
+      "hepatitis",
+      "fatty liver disease"
+    ],
+    "treatments": [
+      "treat underlying cause",
+      "manage complications",
+      "transplant"
+    ],
+    "sources": []
+  },
+  "researchPapers": [],
+  "clinicalGuidelines": [],
+  "trustedSources": [],
+  "totalSources": 0,
+  "lastUpdated": "2026-05-28T08:41:37.111Z"
+}

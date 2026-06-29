@@ -1,0 +1,31 @@
+{
+  "condition": {
+    "name": "Colorectal Cancer",
+    "icd10Code": "C18-C20",
+    "category": "Oncology",
+    "symptoms": [
+      "rectal bleeding",
+      "abdominal pain",
+      "weight loss",
+      "bowel changes"
+    ],
+    "causes": [
+      "polyps",
+      "genetics",
+      "diet",
+      "inflammatory bowel disease"
+    ],
+    "treatments": [
+      "surgery",
+      "chemotherapy",
+      "radiation",
+      "targeted therapy"
+    ],
+    "sources": []
+  },
+  "researchPapers": [],
+  "clinicalGuidelines": [],
+  "trustedSources": [],
+  "totalSources": 0,
+  "lastUpdated": "2026-05-28T08:41:51.933Z"
+}

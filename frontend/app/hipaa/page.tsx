@@ -6,8 +6,15 @@ export default function HIPAAPage() {
       title="HIPAA Compliance"
       description="Our commitment to healthcare data security"
     >
+      <p className="text-gray-700 mb-6 rounded-lg bg-amber-50 border border-amber-200 p-4">
+        <strong>Status: pre-certification.</strong> The platform is engineered against HIPAA
+        Privacy and Security Rule safeguards, but is not yet formally HIPAA-certified and is not a
+        certified medical device. Production deployment moves PHI onto HIPAA-eligible AWS services
+        (e.g. AWS HealthLake) under a signed Business Associate Addendum.
+      </p>
       <p className="text-gray-700 mb-4">
-        We are fully compliant with the Health Insurance Portability and Accountability Act (HIPAA) and maintain the highest standards of patient data protection.
+        We design to the Health Insurance Portability and Accountability Act (HIPAA) safeguards and
+        maintain strong standards of patient data protection.
       </p>
       <h2 className="text-2xl font-bold text-gray-900 mt-8 mb-4">Technical Safeguards</h2>
       <ul className="list-disc pl-6 text-gray-700 mb-4 space-y-2">

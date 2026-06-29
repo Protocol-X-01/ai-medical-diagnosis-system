@@ -1,5 +1,7 @@
 import Link from 'next/link'
 import { Check, ArrowRight } from 'lucide-react'
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
 
 export default function PricingPage() {
   const plans = [
@@ -7,15 +9,18 @@ export default function PricingPage() {
       name: 'Starter',
       price: '$499',
       period: '/month',
-      description: 'Perfect for small clinics and individual practitioners',
+      description: 'For small clinics and front-desk teams',
       features: [
-        'Up to 100 diagnoses/month',
-        '5 AI agents with quorum consensus',
-        'Access to 35M+ medical documents',
-        'Basic analytics dashboard',
+        'Up to 100 assessments/month',
+        '3-model quorum (2-of-3 consensus)',
+        'Citation-grounded encyclopedia (11,000+ conditions)',
+        'Staff encyclopedia lookup',
+        'Treatments & red-flag guidance',
+        'Image analysis & visual differential',
+        'Audit trail of every assessment',
+        'API access',
+        'HIPAA-aligned design',
         'Email support',
-        'HIPAA compliant',
-        'API access'
       ],
       cta: 'Start Free Trial',
       highlighted: false
@@ -24,17 +29,16 @@ export default function PricingPage() {
       name: 'Professional',
       price: '$999',
       period: '/month',
-      description: 'Ideal for medium-sized healthcare facilities',
+      description: 'For medium-sized healthcare facilities',
       features: [
-        'Up to 500 diagnoses/month',
-        '5 AI agents with quorum consensus',
-        'Access to 35M+ medical documents',
-        'Advanced analytics & reporting',
-        'Priority support (24/7)',
-        'HIPAA compliant',
+        'Everything in Starter',
+        'Up to 500 assessments/month',
+        'Rare-disease coverage (8,000+ conditions)',
+        'Ranked differential options on ambiguous cases',
+        'Usage analytics dashboard',
         'Full API access',
-        'Custom integrations',
-        'Team collaboration tools'
+        'Custom integrations (on request)',
+        'Priority support',
       ],
       cta: 'Start Free Trial',
       highlighted: true
@@ -45,18 +49,12 @@ export default function PricingPage() {
       period: '/month',
       description: 'For large hospitals and healthcare networks',
       features: [
-        'Unlimited diagnoses',
-        '5 AI agents with quorum consensus',
-        'Access to 35M+ medical documents',
-        'Enterprise analytics suite',
-        'Dedicated support team',
-        'HIPAA compliant',
-        'Full API access',
-        'Custom integrations',
-        'Team collaboration tools',
-        'Custom AI agent training',
-        'On-premise deployment option',
-        'SLA guarantee (99.9% uptime)'
+        'Everything in Professional',
+        'Unlimited assessments',
+        'Custom condition sets & domain tuning (on request)',
+        'On-premise / private-VPC deployment option',
+        'SSO & dedicated support',
+        '99.9% uptime target',
       ],
       cta: 'Contact Sales',
       highlighted: false
@@ -65,24 +63,7 @@ export default function PricingPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
-      {/* Header */}
-      <header className="bg-white border-b border-gray-200">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <Link href="/" className="text-2xl font-bold text-blue-600">
-              AI Medical Diagnosis
-            </Link>
-            <div className="flex items-center gap-4">
-              <Link href="/demo" className="text-gray-600 hover:text-gray-900">
-                Demo
-              </Link>
-              <Link href="/dashboard" className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
-                Sign In
-              </Link>
-            </div>
-          </div>
-        </div>
-      </header>
+      <Header />
 
       <main className="container mx-auto px-4 py-16">
         {/* Header */}
@@ -182,7 +163,7 @@ export default function PricingPage() {
             <div className="bg-white p-6 rounded-xl border border-gray-200">
               <h3 className="font-bold text-gray-900 mb-2">Is my data secure?</h3>
               <p className="text-gray-600">
-                Yes. We are fully HIPAA compliant with end-to-end encryption, regular security audits, and enterprise-grade infrastructure on AWS.
+                Security is foundational: encryption in transit, audit logging, least-privilege access, and de-identified inputs on AWS infrastructure. The platform is built to align with HIPAA controls; formal HIPAA/SOC 2 certification is on our roadmap.
               </p>
             </div>
             
@@ -212,6 +193,7 @@ export default function PricingPage() {
           </Link>
         </div>
       </main>
+      <Footer />
     </div>
   )
 }

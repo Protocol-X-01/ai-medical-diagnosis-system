@@ -1,0 +1,29 @@
+{
+  "condition": {
+    "name": "Heart Failure",
+    "icd10Code": "I50",
+    "category": "Cardiology",
+    "symptoms": [
+      "shortness of breath",
+      "fatigue",
+      "swelling",
+      "rapid heartbeat"
+    ],
+    "causes": [
+      "coronary artery disease",
+      "hypertension",
+      "cardiomyopathy"
+    ],
+    "treatments": [
+      "ACE inhibitors",
+      "diuretics",
+      "beta blockers"
+    ],
+    "sources": []
+  },
+  "researchPapers": [],
+  "clinicalGuidelines": [],
+  "trustedSources": [],
+  "totalSources": 0,
+  "lastUpdated": "2026-05-28T08:40:58.342Z"
+}

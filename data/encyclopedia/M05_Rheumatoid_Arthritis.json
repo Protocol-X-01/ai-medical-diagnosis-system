@@ -1,0 +1,30 @@
+{
+  "condition": {
+    "name": "Rheumatoid Arthritis",
+    "icd10Code": "M05",
+    "category": "Rheumatology",
+    "symptoms": [
+      "joint pain",
+      "swelling",
+      "stiffness",
+      "fatigue"
+    ],
+    "causes": [
+      "autoimmune",
+      "genetics",
+      "environmental factors"
+    ],
+    "treatments": [
+      "DMARDs",
+      "biologics",
+      "NSAIDs",
+      "corticosteroids"
+    ],
+    "sources": []
+  },
+  "researchPapers": [],
+  "clinicalGuidelines": [],
+  "trustedSources": [],
+  "totalSources": 0,
+  "lastUpdated": "2026-05-28T08:41:54.611Z"
+}

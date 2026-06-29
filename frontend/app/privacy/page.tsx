@@ -19,7 +19,7 @@ export default function PrivacyPage() {
       </p>
       <h2 className="text-2xl font-bold text-gray-900 mt-8 mb-4">Data Security</h2>
       <p className="text-gray-700 mb-4">
-        We employ enterprise-grade security measures including end-to-end encryption, regular security audits, and HIPAA-compliant infrastructure.
+        We employ strong security measures including encryption in transit, audit logging, and HIPAA-eligible AWS infrastructure. Formal HIPAA certification is on our roadmap.
       </p>
     </InfoPage>
   )

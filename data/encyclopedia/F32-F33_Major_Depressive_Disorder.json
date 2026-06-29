@@ -1,0 +1,30 @@
+{
+  "condition": {
+    "name": "Major Depressive Disorder",
+    "icd10Code": "F32-F33",
+    "category": "Psychiatry",
+    "symptoms": [
+      "persistent sadness",
+      "loss of interest",
+      "fatigue",
+      "sleep changes"
+    ],
+    "causes": [
+      "genetics",
+      "brain chemistry",
+      "life events",
+      "medical conditions"
+    ],
+    "treatments": [
+      "antidepressants",
+      "psychotherapy",
+      "lifestyle changes"
+    ],
+    "sources": []
+  },
+  "researchPapers": [],
+  "clinicalGuidelines": [],
+  "trustedSources": [],
+  "totalSources": 0,
+  "lastUpdated": "2026-05-28T08:42:16.469Z"
+}

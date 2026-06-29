@@ -4,6 +4,8 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { Play, Pause, RotateCcw, ArrowRight, CheckCircle, Activity, FileText } from 'lucide-react'
 
+import Header from '@/components/Header'
+
 export default function DemoPage() {
   const [isPlaying, setIsPlaying] = useState(false)
   const [currentStep, setCurrentStep] = useState(0)
@@ -23,7 +25,7 @@ export default function DemoPage() {
     },
     {
       title: 'Quorum Consensus',
-      description: 'Agents reach 4/5 consensus with verified citations',
+      description: 'Models reach 2-of-3 consensus with verified citations',
       duration: '5 seconds',
       icon: <CheckCircle className="w-6 h-6" />
     },
@@ -59,22 +61,7 @@ export default function DemoPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
-      {/* Header */}
-      <header className="bg-white border-b border-gray-200">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <Link href="/" className="text-2xl font-bold text-blue-600">
-              AI Medical Diagnosis
-            </Link>
-            <Link
-              href="/"
-              className="text-gray-600 hover:text-gray-900 font-medium"
-            >
-              ← Back to Home
-            </Link>
-          </div>
-        </div>
-      </header>
+      <Header />
 
       <main className="container mx-auto px-4 py-16 max-w-6xl">
         {/* Hero Section */}
@@ -83,7 +70,7 @@ export default function DemoPage() {
             Interactive Demo
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8">
-            See how our AI-powered diagnosis system works in real-time with zero hallucinations
+            See how the citation-grounded multi-model quorum works in real time
           </p>
           
           {/* Demo Video Placeholder */}
@@ -168,9 +155,9 @@ export default function DemoPage() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div>
-              <h3 className="font-bold text-gray-900 mb-2">Zero Hallucinations</h3>
+              <h3 className="font-bold text-gray-900 mb-2">Hallucination-Resistant</h3>
               <p className="text-gray-600 text-sm">
-                Every diagnosis requires 4/5 agent consensus and is backed by verified medical literature
+                Every assessment requires 2-of-3 model consensus and may only cite sources held in the verified store
               </p>
             </div>
             <div>
@@ -180,9 +167,9 @@ export default function DemoPage() {
               </p>
             </div>
             <div>
-              <h3 className="font-bold text-gray-900 mb-2">HIPAA Compliant</h3>
+              <h3 className="font-bold text-gray-900 mb-2">HIPAA-aligned</h3>
               <p className="text-gray-600 text-sm">
-                Enterprise-grade security with end-to-end encryption and audit logging
+                Encryption in transit, audit logging, and de-identified inputs — certification on the roadmap
               </p>
             </div>
           </div>

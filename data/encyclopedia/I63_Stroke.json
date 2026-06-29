@@ -1,0 +1,29 @@
+{
+  "condition": {
+    "name": "Stroke",
+    "icd10Code": "I63",
+    "category": "Neurology",
+    "symptoms": [
+      "sudden weakness",
+      "speech difficulty",
+      "vision changes",
+      "severe headache"
+    ],
+    "causes": [
+      "blood clot",
+      "hemorrhage",
+      "atherosclerosis"
+    ],
+    "treatments": [
+      "thrombolytics",
+      "antiplatelet agents",
+      "rehabilitation"
+    ],
+    "sources": []
+  },
+  "researchPapers": [],
+  "clinicalGuidelines": [],
+  "trustedSources": [],
+  "totalSources": 0,
+  "lastUpdated": "2026-05-28T08:41:20.369Z"
+}

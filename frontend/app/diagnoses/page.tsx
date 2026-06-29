@@ -15,6 +15,8 @@ interface Diagnosis {
   urgency: 'routine' | 'urgent' | 'emergency'
 }
 
+import Header from '@/components/Header'
+
 export default function DiagnosesPage() {
   const [searchTerm, setSearchTerm] = useState('')
   const [filterUrgency, setFilterUrgency] = useState<string>('all')
@@ -102,19 +104,7 @@ export default function DiagnosesPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white border-b border-gray-200">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <Link href="/dashboard" className="text-2xl font-bold text-blue-600">
-              AI Medical Diagnosis
-            </Link>
-            <Link href="/dashboard" className="text-gray-600 hover:text-gray-900 font-medium">
-              ← Back to Dashboard
-            </Link>
-          </div>
-        </div>
-      </header>
+      <Header />
 
       <main className="container mx-auto px-4 py-8 max-w-7xl">
         {/* Page Header */}

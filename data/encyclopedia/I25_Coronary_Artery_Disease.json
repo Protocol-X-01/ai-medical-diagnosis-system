@@ -1,0 +1,28 @@
+{
+  "condition": {
+    "name": "Coronary Artery Disease",
+    "icd10Code": "I25",
+    "category": "Cardiology",
+    "symptoms": [
+      "chest pain",
+      "shortness of breath",
+      "fatigue"
+    ],
+    "causes": [
+      "atherosclerosis",
+      "high cholesterol",
+      "smoking"
+    ],
+    "treatments": [
+      "statins",
+      "antiplatelet agents",
+      "revascularization"
+    ],
+    "sources": []
+  },
+  "researchPapers": [],
+  "clinicalGuidelines": [],
+  "trustedSources": [],
+  "totalSources": 0,
+  "lastUpdated": "2026-05-28T08:41:01.051Z"
+}

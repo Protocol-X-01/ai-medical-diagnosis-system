@@ -1,0 +1,28 @@
+{
+  "condition": {
+    "name": "Tuberculosis",
+    "icd10Code": "A15",
+    "category": "Infectious Disease",
+    "symptoms": [
+      "chronic cough",
+      "fever",
+      "night sweats",
+      "weight loss"
+    ],
+    "causes": [
+      "Mycobacterium tuberculosis"
+    ],
+    "treatments": [
+      "isoniazid",
+      "rifampin",
+      "pyrazinamide",
+      "ethambutol"
+    ],
+    "sources": []
+  },
+  "researchPapers": [],
+  "clinicalGuidelines": [],
+  "trustedSources": [],
+  "totalSources": 0,
+  "lastUpdated": "2026-05-28T08:41:42.613Z"
+}

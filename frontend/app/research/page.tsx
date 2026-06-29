@@ -17,6 +17,8 @@ interface ResearchArticle {
   relevance: number
 }
 
+import Header from '@/components/Header'
+
 export default function ResearchPage() {
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
@@ -142,29 +144,14 @@ export default function ResearchPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white border-b border-gray-200">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <Link href="/dashboard" className="text-2xl font-bold text-blue-600">
-              AI Medical Diagnosis
-            </Link>
-            <Link
-              href="/dashboard"
-              className="text-gray-600 hover:text-gray-900 font-medium"
-            >
-              ← Back to Dashboard
-            </Link>
-          </div>
-        </div>
-      </header>
+      <Header />
 
       <main className="container mx-auto px-4 py-8 max-w-7xl">
         {/* Page Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Medical Research Database</h1>
           <p className="text-gray-600">
-            Access to 35M+ verified medical documents, research papers, and clinical guidelines
+            A curated knowledge base of conditions anchored to verified guidelines and peer-reviewed sources
           </p>
         </div>
 
@@ -173,9 +160,9 @@ export default function ResearchPage() {
           <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
             <div className="flex items-center gap-3 mb-2">
               <BookOpen className="w-6 h-6 text-blue-600" />
-              <div className="text-3xl font-bold text-blue-600">35M+</div>
+              <div className="text-3xl font-bold text-blue-600">Guideline</div>
             </div>
-            <div className="text-gray-600">Medical Documents</div>
+            <div className="text-gray-600">Anchored Sources</div>
           </div>
           <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
             <div className="flex items-center gap-3 mb-2">
@@ -302,7 +289,7 @@ export default function ResearchPage() {
             About Our Research Database
           </h3>
           <p className="text-blue-800 mb-4">
-            Our AI system is trained on 35M+ verified medical documents including:
+            Our system grounds every assessment in a curated knowledge base of verified sources, including:
           </p>
           <ul className="space-y-2 text-blue-800">
             <li className="flex items-start gap-2">

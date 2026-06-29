@@ -1,0 +1,29 @@
+{
+  "condition": {
+    "name": "Hyperthyroidism",
+    "icd10Code": "E05",
+    "category": "Endocrinology",
+    "symptoms": [
+      "weight loss",
+      "rapid heartbeat",
+      "anxiety",
+      "tremor"
+    ],
+    "causes": [
+      "Graves disease",
+      "toxic nodular goiter",
+      "thyroiditis"
+    ],
+    "treatments": [
+      "antithyroid drugs",
+      "radioactive iodine",
+      "surgery"
+    ],
+    "sources": []
+  },
+  "researchPapers": [],
+  "clinicalGuidelines": [],
+  "trustedSources": [],
+  "totalSources": 0,
+  "lastUpdated": "2026-05-28T08:41:09.444Z"
+}

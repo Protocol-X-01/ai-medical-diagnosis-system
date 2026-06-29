@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import { ArrowLeft, Activity, Calendar, FileText, ExternalLink, CheckCircle } from 'lucide-react'
 
+import Header from '@/components/Header'
+
 export default function DiagnosisDetailPage({ params }: { params: { id: string } }) {
   // Mock data - in production, fetch based on params.id
   const diagnosis = {
@@ -58,20 +60,7 @@ export default function DiagnosisDetailPage({ params }: { params: { id: string }
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white border-b border-gray-200">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <Link href="/dashboard" className="text-2xl font-bold text-blue-600">
-              AI Medical Diagnosis
-            </Link>
-            <Link href="/diagnoses" className="text-gray-600 hover:text-gray-900 font-medium flex items-center gap-2">
-              <ArrowLeft className="w-4 h-4" />
-              Back to All Diagnoses
-            </Link>
-          </div>
-        </div>
-      </header>
+      <Header />
 
       <main className="container mx-auto px-4 py-8 max-w-6xl">
         {/* Header */}

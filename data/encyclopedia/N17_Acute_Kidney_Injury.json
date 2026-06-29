@@ -1,0 +1,30 @@
+{
+  "condition": {
+    "name": "Acute Kidney Injury",
+    "icd10Code": "N17",
+    "category": "Nephrology",
+    "symptoms": [
+      "decreased urine output",
+      "fluid retention",
+      "confusion",
+      "fatigue"
+    ],
+    "causes": [
+      "dehydration",
+      "medications",
+      "sepsis",
+      "obstruction"
+    ],
+    "treatments": [
+      "treat underlying cause",
+      "IV fluids",
+      "dialysis if severe"
+    ],
+    "sources": []
+  },
+  "researchPapers": [],
+  "clinicalGuidelines": [],
+  "trustedSources": [],
+  "totalSources": 0,
+  "lastUpdated": "2026-05-28T08:42:05.522Z"
+}

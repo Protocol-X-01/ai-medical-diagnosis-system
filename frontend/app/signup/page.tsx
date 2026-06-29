@@ -1,22 +1,12 @@
 import Link from 'next/link'
 import { ArrowRight, CheckCircle, Shield, Zap } from 'lucide-react'
 
+import Header from '@/components/Header'
+
 export default function SignupPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
-      {/* Header */}
-      <header className="bg-white border-b border-gray-200">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <Link href="/" className="text-2xl font-bold text-blue-600">
-              AI Medical Diagnosis
-            </Link>
-            <Link href="/dashboard" className="text-gray-600 hover:text-gray-900 font-medium">
-              Sign In
-            </Link>
-          </div>
-        </div>
-      </header>
+      <Header />
 
       <main className="container mx-auto px-4 py-16 max-w-6xl">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -26,7 +16,7 @@ export default function SignupPage() {
               Start Your 30-Day Free Trial
             </h1>
             <p className="text-xl text-gray-600 mb-8">
-              Join leading healthcare providers using AI-powered diagnosis with zero hallucinations
+              Citation-grounded clinical decision support — every assessment traceable to a verified source
             </p>
 
             <div className="space-y-4 mb-8">
@@ -47,8 +37,8 @@ export default function SignupPage() {
               <div className="flex items-start gap-3">
                 <Shield className="w-6 h-6 text-purple-600 flex-shrink-0 mt-1" />
                 <div>
-                  <h3 className="font-semibold text-gray-900">HIPAA Compliant</h3>
-                  <p className="text-gray-600">Enterprise security from day one</p>
+                  <h3 className="font-semibold text-gray-900">HIPAA-aligned design</h3>
+                  <p className="text-gray-600">Encryption, audit logging, de-identified inputs — certification on the roadmap</p>
                 </div>
               </div>
             </div>
@@ -57,8 +47,8 @@ export default function SignupPage() {
               <h3 className="font-bold text-blue-900 mb-2">What's Included:</h3>
               <ul className="space-y-2 text-blue-800 text-sm">
                 <li>• Unlimited diagnoses during trial</li>
-                <li>• Access to 35M+ medical documents</li>
-                <li>• 5 AI agents with quorum consensus</li>
+                <li>• Citation-grounded knowledge base</li>
+                <li>• 3-model quorum (2-of-3 consensus)</li>
                 <li>• Full API access</li>
                 <li>• Priority support</li>
               </ul>

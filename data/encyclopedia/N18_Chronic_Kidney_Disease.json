@@ -1,0 +1,30 @@
+{
+  "condition": {
+    "name": "Chronic Kidney Disease",
+    "icd10Code": "N18",
+    "category": "Nephrology",
+    "symptoms": [
+      "fatigue",
+      "swelling",
+      "decreased urine output",
+      "nausea"
+    ],
+    "causes": [
+      "diabetes",
+      "hypertension",
+      "glomerulonephritis"
+    ],
+    "treatments": [
+      "treat underlying cause",
+      "manage complications",
+      "dialysis",
+      "transplant"
+    ],
+    "sources": []
+  },
+  "researchPapers": [],
+  "clinicalGuidelines": [],
+  "trustedSources": [],
+  "totalSources": 0,
+  "lastUpdated": "2026-05-28T08:42:02.747Z"
+}

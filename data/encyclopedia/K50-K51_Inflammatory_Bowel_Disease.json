@@ -1,0 +1,30 @@
+{
+  "condition": {
+    "name": "Inflammatory Bowel Disease",
+    "icd10Code": "K50-K51",
+    "category": "Gastroenterology",
+    "symptoms": [
+      "abdominal pain",
+      "diarrhea",
+      "weight loss",
+      "fatigue"
+    ],
+    "causes": [
+      "immune dysfunction",
+      "genetics",
+      "environmental factors"
+    ],
+    "treatments": [
+      "aminosalicylates",
+      "corticosteroids",
+      "biologics",
+      "surgery"
+    ],
+    "sources": []
+  },
+  "researchPapers": [],
+  "clinicalGuidelines": [],
+  "trustedSources": [],
+  "totalSources": 0,
+  "lastUpdated": "2026-05-28T08:41:34.288Z"
+}

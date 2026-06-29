@@ -1,0 +1,30 @@
+{
+  "condition": {
+    "name": "Sepsis",
+    "icd10Code": "A41",
+    "category": "Infectious Disease",
+    "symptoms": [
+      "fever",
+      "rapid heart rate",
+      "confusion",
+      "low blood pressure"
+    ],
+    "causes": [
+      "bacterial infection",
+      "fungal infection",
+      "viral infection"
+    ],
+    "treatments": [
+      "antibiotics",
+      "IV fluids",
+      "vasopressors",
+      "source control"
+    ],
+    "sources": []
+  },
+  "researchPapers": [],
+  "clinicalGuidelines": [],
+  "trustedSources": [],
+  "totalSources": 0,
+  "lastUpdated": "2026-05-28T08:41:39.893Z"
+}

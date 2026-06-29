@@ -1,0 +1,30 @@
+{
+  "condition": {
+    "name": "Alzheimer Disease",
+    "icd10Code": "G30",
+    "category": "Neurology",
+    "symptoms": [
+      "memory loss",
+      "confusion",
+      "personality changes",
+      "difficulty with tasks"
+    ],
+    "causes": [
+      "amyloid plaques",
+      "tau tangles",
+      "genetics",
+      "age"
+    ],
+    "treatments": [
+      "cholinesterase inhibitors",
+      "memantine",
+      "supportive care"
+    ],
+    "sources": []
+  },
+  "researchPapers": [],
+  "clinicalGuidelines": [],
+  "trustedSources": [],
+  "totalSources": 0,
+  "lastUpdated": "2026-05-28T08:41:23.104Z"
+}

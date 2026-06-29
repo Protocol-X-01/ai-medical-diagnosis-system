@@ -1,0 +1,30 @@
+{
+  "condition": {
+    "name": "Gastroesophageal Reflux Disease",
+    "icd10Code": "K21",
+    "category": "Gastroenterology",
+    "symptoms": [
+      "heartburn",
+      "regurgitation",
+      "chest pain",
+      "difficulty swallowing"
+    ],
+    "causes": [
+      "lower esophageal sphincter dysfunction",
+      "hiatal hernia",
+      "obesity"
+    ],
+    "treatments": [
+      "PPIs",
+      "H2 blockers",
+      "lifestyle changes",
+      "surgery"
+    ],
+    "sources": []
+  },
+  "researchPapers": [],
+  "clinicalGuidelines": [],
+  "trustedSources": [],
+  "totalSources": 0,
+  "lastUpdated": "2026-05-28T08:41:31.581Z"
+}

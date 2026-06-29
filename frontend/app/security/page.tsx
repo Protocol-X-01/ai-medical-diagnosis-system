@@ -12,7 +12,7 @@ export default function SecurityPage() {
       </p>
       <h2 className="text-2xl font-bold text-gray-900 mt-8 mb-4">Data Protection</h2>
       <p className="text-gray-700 mb-4">
-        All patient data is encrypted using AES-256 encryption and stored in HIPAA-compliant AWS infrastructure.
+        All data is encrypted using AES-256 at rest and TLS in transit, on HIPAA-eligible AWS infrastructure. Inputs are de-identified by design.
       </p>
       <h2 className="text-2xl font-bold text-gray-900 mt-8 mb-4">Access Control</h2>
       <p className="text-gray-700 mb-4">

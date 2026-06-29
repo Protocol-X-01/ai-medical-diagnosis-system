@@ -1,0 +1,29 @@
+{
+  "condition": {
+    "name": "Psoriasis",
+    "icd10Code": "L40",
+    "category": "Dermatology",
+    "symptoms": [
+      "red patches",
+      "silvery scales",
+      "itching",
+      "burning"
+    ],
+    "causes": [
+      "immune system",
+      "genetics",
+      "triggers"
+    ],
+    "treatments": [
+      "topical corticosteroids",
+      "phototherapy",
+      "biologics"
+    ],
+    "sources": []
+  },
+  "researchPapers": [],
+  "clinicalGuidelines": [],
+  "trustedSources": [],
+  "totalSources": 0,
+  "lastUpdated": "2026-05-28T08:42:08.285Z"
+}
