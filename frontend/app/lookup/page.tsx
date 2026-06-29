@@ -16,6 +16,9 @@ interface Condition {
   redFlags: string[]
   citations: { id: string; title: string; source: string; url: string }[]
   imageUrl?: string
+  pathophysiology?: string
+  investigations?: string[]
+  keyPoints?: string[]
 }
 
 const SOURCE_LABEL: Record<string, string> = {
@@ -108,6 +111,28 @@ export default function LookupPage() {
                     {c.imageUrl && (
                       /* eslint-disable-next-line @next/next/no-img-element */
                       <img src={c.imageUrl} alt={c.name} className="mb-4 max-h-56 rounded-lg object-contain ring-1 ring-slate-200" />
+                    )}
+                    {c.pathophysiology && (
+                      <div className="mb-3">
+                        <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-slate-400">Pathophysiology</p>
+                        <p className="text-sm leading-relaxed text-slate-700">{c.pathophysiology}</p>
+                      </div>
+                    )}
+                    {c.investigations && c.investigations.length > 0 && (
+                      <div className="mb-3">
+                        <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-slate-400">Key investigations</p>
+                        <ul className="space-y-0.5">
+                          {c.investigations.map((x) => <li key={x} className="flex items-start gap-2 text-sm text-slate-700"><span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-blue-400" />{x}</li>)}
+                        </ul>
+                      </div>
+                    )}
+                    {c.keyPoints && c.keyPoints.length > 0 && (
+                      <div className="mb-3 rounded-lg bg-amber-50 p-3 ring-1 ring-inset ring-amber-100">
+                        <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-amber-700">Key points</p>
+                        <ul className="space-y-0.5">
+                          {c.keyPoints.map((x) => <li key={x} className="flex items-start gap-2 text-sm text-amber-900"><span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-amber-400" />{x}</li>)}
+                        </ul>
+                      </div>
                     )}
                     {c.symptoms.length > 0 && (
                       <div className="mb-3">

@@ -28,6 +28,9 @@ export async function GET(request: NextRequest) {
         redFlags: c.redFlags?.slice(0, 6) || [],
         citations: c.citations || [],
         imageUrl: c.imageUrl,
+        pathophysiology: c.pathophysiology,
+        investigations: c.investigations || [],
+        keyPoints: c.keyPoints || [],
       })),
     })
   } catch (err) {

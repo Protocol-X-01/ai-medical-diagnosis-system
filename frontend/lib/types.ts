@@ -26,6 +26,10 @@ export interface ConditionEntry {
   source?: string
   /** Representative reference image (open-licensed) for visual comparison. */
   imageUrl?: string
+  /** Teaching depth (AMBOSS-style) for clinicians/students — optional. */
+  pathophysiology?: string
+  investigations?: string[]
+  keyPoints?: string[]
   /** Commonality prior (0..1): curated common conditions ~1.0; bulk/rare lower.
    *  Multiplies retrieval match-strength so common conditions rank ahead of rare
    *  ones on equal symptom overlap. Defaults to 1 when absent. */
