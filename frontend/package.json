@@ -17,7 +17,9 @@
     "import-extended": "tsx scripts/import-extended-conditions.ts",
     "import-extended2": "tsx scripts/import-extended-conditions-2.ts",
     "fetch-pubmed": "tsx scripts/fetch-pubmed.ts",
-    "import-teaching": "tsx scripts/import-teaching.ts"
+    "import-teaching": "tsx scripts/import-teaching.ts",
+    "check-citations": "tsx scripts/check-citations.ts",
+    "apply-citations": "tsx scripts/apply-citations.ts"
   },
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.700.0",
