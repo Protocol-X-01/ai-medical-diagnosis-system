@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
   Plus, X, Loader2, ShieldCheck, ShieldAlert, AlertTriangle, ArrowUpRight,
   Stethoscope, FileText, Gavel, Sparkles, Activity, ImagePlus, Eye,
@@ -47,6 +47,13 @@ export default function DiagnosePage() {
   const [sex, setSex] = useState('')
   const [image, setImage] = useState<string | null>(null)
   const [imageName, setImageName] = useState('')
+  const [patientRef, setPatientRef] = useState('')
+
+  // Linked from a patient record (/diagnose?patientRef=...) so the assessment is filed against them.
+  useEffect(() => {
+    const ref = new URLSearchParams(window.location.search).get('patientRef')
+    if (ref) setPatientRef(ref)
+  }, [])
   const [status, setStatus] = useState<'idle' | 'loading' | 'done' | 'error'>('idle')
   const [result, setResult] = useState<DiagnosisResponse | null>(null)
   const [error, setError] = useState('')
@@ -97,6 +104,7 @@ export default function DiagnosePage() {
           ageBand: ageBand || undefined,
           sex: sex || undefined,
           imageDataUrl: image || undefined,
+          patientRef: patientRef || undefined,
         }),
       })
       if (!res.ok) throw new Error((await res.json().catch(() => ({})))?.error || `Request failed (${res.status})`)

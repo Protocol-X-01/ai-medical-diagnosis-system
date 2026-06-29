@@ -79,7 +79,7 @@ export async function POST(request: NextRequest) {
 
     // 2) Weighted quorum (+ escalation) + 3) safety gate.
     const result = await runQuorum(input, scored)
-    const enriched = { ...result, visualFindings, metadata: { ...result.metadata, groundingSource } }
+    const enriched = { ...result, visualFindings, patientRef: input.patientRef, metadata: { ...result.metadata, groundingSource } }
 
     // 4) Audit trail (best-effort; never block the response on the write).
     saveDiagnosis(enriched).catch((e) =>

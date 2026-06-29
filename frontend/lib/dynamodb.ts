@@ -21,6 +21,7 @@ import { buildIndex, scoreConditions, type ScoredCondition } from './symptom-ind
 
 export const CONDITIONS_TABLE = process.env.DDB_CONDITIONS_TABLE || 'MedicalConditions'
 export const DIAGNOSES_TABLE = process.env.DDB_DIAGNOSES_TABLE || 'Diagnoses'
+export const PATIENTS_TABLE = process.env.DDB_PATIENTS_TABLE || 'Patients'
 
 let _doc: DynamoDBDocumentClient | null = null
 function doc(): DynamoDBDocumentClient {
@@ -188,4 +189,46 @@ export async function getDiagnosis(requestId: string): Promise<DiagnosisResponse
     new GetCommand({ TableName: DIAGNOSES_TABLE, Key: { requestId } })
   )
   return (res.Item as DiagnosisResponse) || null
+}
+
+// ---- Patients (clinic-held records; staff behind the desk legitimately see these;
+// the AI grounding stays de-identified via a pseudonymous patientRef) -----------
+
+export interface Patient {
+  patientId: string
+  name: string
+  ageBand?: string
+  sex?: string
+  notes?: string
+  createdAt: string
+}
+
+export async function listPatients(): Promise<Patient[]> {
+  const res = await doc().send(new ScanCommand({ TableName: PATIENTS_TABLE }))
+  return ((res.Items as Patient[]) || []).sort((a, b) => (b.createdAt || '').localeCompare(a.createdAt || ''))
+}
+
+export async function getPatient(patientId: string): Promise<Patient | null> {
+  const res = await doc().send(new GetCommand({ TableName: PATIENTS_TABLE, Key: { patientId } }))
+  return (res.Item as Patient) || null
+}
+
+export async function putPatient(p: Patient): Promise<void> {
+  await doc().send(new PutCommand({ TableName: PATIENTS_TABLE, Item: p }))
+}
+
+/** Assessments linked to a patient via the pseudonymous patientRef stored on save. */
+export async function listDiagnosesByPatient(patientId: string): Promise<DiagnosisSummary[]> {
+  const res = await doc().send(new ScanCommand({ TableName: DIAGNOSES_TABLE }))
+  const rows = ((res.Items as (DiagnosisResponse & { patientRef?: string })[]) || [])
+    .filter((r) => r.patientRef === patientId)
+    .map((r) => ({
+      requestId: r.requestId,
+      diagnosis: r.consensus?.diagnosis ?? null,
+      confidence: r.consensus?.confidence ?? 0,
+      reached: r.consensus?.reached ?? false,
+      safe: r.safety?.safe ?? true,
+      timestamp: r.metadata?.timestamp || '',
+    }))
+  return rows.sort((a, b) => (b.timestamp || '').localeCompare(a.timestamp || ''))
 }
