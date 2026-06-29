@@ -277,6 +277,13 @@ export default function DiagnosePage() {
                       </div>
                     )}
 
+                    {c.contested && c.closeContenders && c.closeContenders.length > 0 && (
+                      <div className="flex items-start gap-2.5 border-b border-slate-100 bg-amber-50 px-6 py-3 text-sm text-amber-800">
+                        <AlertTriangle className="mt-0.5 h-4 w-4 flex-shrink-0" />
+                        <span><strong>Close call</strong> — the models nearly split. Keep {c.closeContenders.map((cc, i) => <span key={cc.diagnosis}>{i > 0 ? ' and ' : ''}<strong>{cc.diagnosis}</strong> ({pct(cc.weight)})</span>)} in mind as {c.closeContenders.length > 1 ? 'differentials' : 'a differential'}.</span>
+                      </div>
+                    )}
+
                     <div className={`flex items-center gap-2.5 px-6 py-3 text-sm ${result.safety.safe ? 'text-emerald-700' : 'text-rose-700'}`}>
                       {result.safety.safe ? <ShieldCheck className="h-4 w-4" /> : <ShieldAlert className="h-4 w-4" />}
                       {result.safety.safe ? 'Passed independent safety screening' : 'Flagged by safety screening'}

@@ -70,6 +70,10 @@ export interface ConsensusResult {
   topWeightShare: number // winning condition's share of total vote weight (0..1)
   margin: number // gap between top and second condition's weighted share (0..1)
   differentials: { diagnosis: string; icd10?: string; votes: number; weight: number }[]
+  // True when consensus was reached but a runner-up sits within a narrow margin —
+  // a near-tie the clinician should keep in mind, not a clean single answer.
+  contested?: boolean
+  closeContenders?: { diagnosis: string; icd10?: string; weight: number }[]
 }
 
 export interface EscalationResult {

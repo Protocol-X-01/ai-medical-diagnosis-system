@@ -56,6 +56,7 @@ export const SAFETY_MODEL = 'nvidia/nemotron-content-safety-reasoning-4b'
 
 export const QUORUM_MIN_VOTES = 2 // minimum raw agreeing votes for an un-escalated consensus
 export const MARGIN_ESCALATION_THRESHOLD = 0.2 // escalate if top-vs-second weighted margin is below this
+export const CONTESTED_MARGIN = 0.15 // consensus reached but a runner-up within this weighted-share gap is flagged contested
 
 export const DISCLAIMER =
   'Clinical decision-support output. Not a diagnosis and not a substitute for a ' +
@@ -231,6 +232,13 @@ function computeWeightedConsensus(
   const avgConf = top.confs.reduce((s, c) => s + c, 0) / top.confs.length
   const reached = (top.rawVotes >= QUORUM_MIN_VOTES && topShare >= 0.4) || topShare >= 0.55
 
+  // Disagreement handling: even a "reached" consensus can be a near-tie. Flag any
+  // runner-up within CONTESTED_MARGIN of the leader so it's surfaced, not hidden.
+  const closeContenders = reached
+    ? differentials.slice(1).filter((d) => topShare - d.weight <= CONTESTED_MARGIN && d.weight > 0).slice(0, 2)
+    : []
+  const contested = reached && closeContenders.length > 0
+
   return {
     result: {
       reached,
@@ -242,6 +250,8 @@ function computeWeightedConsensus(
       topWeightShare: Math.round(topShare * 1000) / 1000,
       margin: Math.round(margin * 1000) / 1000,
       differentials,
+      contested,
+      closeContenders: closeContenders.map((d) => ({ diagnosis: d.diagnosis, icd10: d.icd10, weight: d.weight })),
     },
     topKey: reached ? topKey : ranked[0][0],
   }
@@ -349,8 +359,11 @@ export async function runQuorum(input: CaseInput, scored: ScoredCondition[]): Pr
   // treatments + red flags; ontology/NIH entries may not).
   const recommendations = extractRecommendations(consensus.result, conditions)
 
+  const contestedNote = consensus.result.contested
+    ? ` Contested: close differential${consensus.result.closeContenders!.length > 1 ? 's' : ''} to keep in mind — ${consensus.result.closeContenders!.map((c) => c.diagnosis).join(', ')}.`
+    : ''
   const narrative = consensus.result.reached
-    ? `Consensus: ${consensus.result.diagnosis} (${consensus.result.icd10}), weighted share ${consensus.result.topWeightShare}, margin ${consensus.result.margin}. ${allVotes.map((v) => v.reasoning).join(' ')}`
+    ? `Consensus: ${consensus.result.diagnosis} (${consensus.result.icd10}), weighted share ${consensus.result.topWeightShare}, margin ${consensus.result.margin}.${contestedNote} ${allVotes.map((v) => v.reasoning).join(' ')}`
     : `No single consensus; ${consensus.result.differentials.length} ranked options presented for clinician review.`
   const safety = await runSafetyGate(narrative)
 

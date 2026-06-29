@@ -95,6 +95,21 @@ roadmap — not claimed as complete.
 a larger corpus; migrate PHI to **AWS HealthLake** (HIPAA-eligible) under a BAA following the AWS
 Well-Architected Healthcare Industry Lens; SOC 2 / HIPAA certification; prospective clinical validation.
 
+### AWS healthcare integration roadmap
+
+Because the product already sits *behind the front desk* on AWS, it maps directly onto AWS's
+healthcare engagement patterns. These are planned integrations, not yet built — each extends a
+capability that exists today:
+
+| AWS use case | AWS services | How it extends what's here today |
+|---|---|---|
+| **Patient engagement** | Amazon Connect + EHR integration | Pipe the multilingual pre-triage widget into a Connect contact flow so phone/chat contacts get the same safe disposition staff get at the desk. |
+| **Verify patient identity** | Amazon Connect Voice ID / Cognito | Authenticate the caller before linking to a patient record (today's pseudonymous `patientRef` becomes a verified identity). |
+| **Appointment scheduling** | Amazon Connect + Lambda → scheduling system | The widget already returns a "book an appointment" disposition; wire that to real calendar slots. |
+| **Ambient clinical documentation** | AWS HealthScribe | Generate a structured visit note from the consultation; the quorum's cited assessment seeds the differential and plan. |
+| **ICD-10 / CPT coding** | Amazon Comprehend Medical | Auto-suggest billing codes — the encyclopedia is already ICD-10-indexed, so this is a natural extension. |
+| **Point-of-care insights** | HealthLake analytics + QuickSight | Turn the `Diagnoses` audit trail into population-level dashboards (presentation mix, consensus rates, throughput). |
+
 ---
 
 ## Demo video script (< 3 minutes)
