@@ -1,5 +1,10 @@
 # Database Schema Documentation
 
+> ⚠️ **Historical planning document.** Some figures and claims here predate the current build and
+> may be outdated or overstated. For the current data model and how Amazon DynamoDB is used, see
+> [`README.md`](README.md) and [`docs/SUBMISSION.md`](docs/SUBMISSION.md).
+
+
 ## AI Hallucination-free Medical Diagnosis System
 
 ### Overview

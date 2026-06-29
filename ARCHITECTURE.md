@@ -1,5 +1,11 @@
 # System Architecture Documentation
 
+> ⚠️ **Historical planning document.** Some figures and claims here predate the current build and
+> may be outdated or overstated. The canonical, accurate architecture is in
+> [`README.md`](README.md), [`docs/SUBMISSION.md`](docs/SUBMISSION.md) and
+> [`docs/architecture-diagram.svg`](docs/architecture-diagram.svg).
+
+
 ## AI Hallucination-free Medical Diagnosis System
 
 ### Table of Contents
