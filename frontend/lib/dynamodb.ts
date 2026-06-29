@@ -22,6 +22,7 @@ import { buildIndex, scoreConditions, type ScoredCondition } from './symptom-ind
 export const CONDITIONS_TABLE = process.env.DDB_CONDITIONS_TABLE || 'MedicalConditions'
 export const DIAGNOSES_TABLE = process.env.DDB_DIAGNOSES_TABLE || 'Diagnoses'
 export const PATIENTS_TABLE = process.env.DDB_PATIENTS_TABLE || 'Patients'
+export const SIGNUPS_TABLE = process.env.DDB_SIGNUPS_TABLE || 'Signups'
 
 let _doc: DynamoDBDocumentClient | null = null
 function doc(): DynamoDBDocumentClient {
@@ -215,6 +216,19 @@ export async function getPatient(patientId: string): Promise<Patient | null> {
 
 export async function putPatient(p: Patient): Promise<void> {
   await doc().send(new PutCommand({ TableName: PATIENTS_TABLE, Item: p }))
+}
+
+export interface Signup {
+  signupId: string
+  email: string
+  name?: string
+  organization?: string
+  createdAt: string
+}
+
+/** Persist a trial / access request (a lead — no password, no account auth). */
+export async function putSignup(s: Signup): Promise<void> {
+  await doc().send(new PutCommand({ TableName: SIGNUPS_TABLE, Item: s }))
 }
 
 /** Assessments linked to a patient via the pseudonymous patientRef stored on save. */

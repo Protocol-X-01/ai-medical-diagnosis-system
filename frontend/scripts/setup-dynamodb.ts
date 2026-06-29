@@ -20,6 +20,7 @@ const client = new DynamoDBClient({ region })
 const CONDITIONS_TABLE = process.env.DDB_CONDITIONS_TABLE || 'MedicalConditions'
 const DIAGNOSES_TABLE = process.env.DDB_DIAGNOSES_TABLE || 'Diagnoses'
 const PATIENTS_TABLE = process.env.DDB_PATIENTS_TABLE || 'Patients'
+const SIGNUPS_TABLE = process.env.DDB_SIGNUPS_TABLE || 'Signups'
 
 async function exists(name: string): Promise<boolean> {
   try {
@@ -58,6 +59,7 @@ async function main() {
   await createTable(CONDITIONS_TABLE, 'conditionId')
   await createTable(DIAGNOSES_TABLE, 'requestId')
   await createTable(PATIENTS_TABLE, 'patientId')
+  await createTable(SIGNUPS_TABLE, 'signupId')
   console.log('Done.')
 }
 
