@@ -243,24 +243,36 @@ export default function DiagnosePage() {
             {status === 'done' && result && c && (
               <div className="space-y-5">
                 {!c.reached ? (
-                  <section className="overflow-hidden rounded-2xl border border-amber-200 bg-white shadow-sm">
-                    <div className="border-b border-amber-100 bg-amber-50 p-6">
-                      <div className="flex items-center gap-2 font-semibold text-amber-800"><AlertTriangle className="h-5 w-5" /> Ambiguous presentation — ranked options</div>
-                      <p className="mt-1 text-sm text-amber-700">
-                        No single condition dominates. Rather than over-commit, here are the most likely grounded possibilities for clinician review.
-                      </p>
-                    </div>
-                    <div className="divide-y divide-slate-100">
-                      {(c.differentials.length ? c.differentials.map((d) => ({ name: d.diagnosis, icd10: d.icd10, w: d.weight })) : result.groundedConditions.map((g) => ({ name: g.name, icd10: g.icd10Code, w: g.matchStrength }))).slice(0, 6).map((o, i) => (
-                        <div key={o.name + i} className="flex items-center justify-between gap-3 px-6 py-3">
-                          <span className="text-sm font-medium text-slate-800">{i + 1}. {o.name}{o.icd10 && !o.icd10.includes(':') ? ` (${o.icd10})` : ''}</span>
-                          <div className="flex w-32 items-center gap-2">
-                            <Bar value={o.w} color="bg-amber-500" /><span className="w-9 text-right text-xs text-slate-400">{pct(o.w)}</span>
+                  c.differentials.length > 0 ? (
+                    <section className="overflow-hidden rounded-2xl border border-amber-200 bg-white shadow-sm">
+                      <div className="border-b border-amber-100 bg-amber-50 p-6">
+                        <div className="flex items-center gap-2 font-semibold text-amber-800"><AlertTriangle className="h-5 w-5" /> Ambiguous presentation — ranked options</div>
+                        <p className="mt-1 text-sm text-amber-700">
+                          No single condition dominates. Rather than over-commit, here are the possibilities the models actually weighed, for clinician review.
+                        </p>
+                      </div>
+                      <div className="divide-y divide-slate-100">
+                        {c.differentials.slice(0, 6).map((d, i) => (
+                          <div key={d.diagnosis + i} className="flex items-center justify-between gap-3 px-6 py-3">
+                            <span className="text-sm font-medium text-slate-800">{i + 1}. {d.diagnosis}{d.icd10 && !d.icd10.includes(':') ? ` (${d.icd10})` : ''}</span>
+                            <div className="flex w-32 items-center gap-2">
+                              <Bar value={d.weight} color="bg-amber-500" /><span className="w-9 text-right text-xs text-slate-400">{pct(d.weight)}</span>
+                            </div>
                           </div>
-                        </div>
-                      ))}
-                    </div>
-                  </section>
+                        ))}
+                      </div>
+                    </section>
+                  ) : (
+                    <section className="rounded-2xl border border-rose-200 bg-rose-50 p-6 text-rose-800">
+                      <div className="flex items-center gap-2 font-semibold"><AlertTriangle className="h-5 w-5" /> Assessment couldn&apos;t be completed</div>
+                      <p className="mt-1 text-sm">
+                        The models didn&apos;t return any usable, grounded votes{result.votes.some((v) => v.error) ? ' (a transient model-service error)' : ''}, so no consensus or ranked options could be produced. This is not an ambiguous result — please run the assessment again.
+                      </p>
+                      <button type="button" onClick={(e) => submit(e as unknown as React.FormEvent)} className="mt-4 inline-flex items-center gap-2 rounded-lg bg-rose-700 px-4 py-2 text-sm font-semibold text-white hover:bg-rose-800">
+                        <Activity className="h-4 w-4" /> Run again
+                      </button>
+                    </section>
+                  )
                 ) : (
                   <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
                     <div className="border-b border-slate-100 bg-gradient-to-br from-slate-50 to-white p-6">

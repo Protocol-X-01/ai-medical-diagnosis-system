@@ -44,39 +44,52 @@ export async function nimChat(opts: NimChatOptions): Promise<NimChatResult> {
     timeoutMs = 45000,
   } = opts
 
-  const controller = new AbortController()
-  const timer = setTimeout(() => controller.abort(), timeoutMs)
+  // NIM occasionally returns a transient upstream error (HTTP 5xx / 429) that
+  // succeeds on a quick retry. Without this, one blip abstains a whole voter — and
+  // if it hits all three, the quorum collapses to a misleading retrieval-only view.
+  const maxAttempts = 3
+  let lastErr: Error | null = null
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    const controller = new AbortController()
+    const timer = setTimeout(() => controller.abort(), timeoutMs)
+    try {
+      const res = await fetch(`${NIM_BASE_URL}/chat/completions`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${getApiKey()}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          model,
+          messages: [
+            ...(system ? [{ role: 'system', content: system }] : []),
+            { role: 'user', content: user },
+          ],
+          temperature,
+          max_tokens: maxTokens,
+        }),
+        signal: controller.signal,
+      })
 
-  try {
-    const res = await fetch(`${NIM_BASE_URL}/chat/completions`, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${getApiKey()}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        model,
-        messages: [
-          ...(system ? [{ role: 'system', content: system }] : []),
-          { role: 'user', content: user },
-        ],
-        temperature,
-        max_tokens: maxTokens,
-      }),
-      signal: controller.signal,
-    })
+      if (!res.ok) {
+        const body = await res.text().catch(() => '')
+        const err = new Error(`NIM ${model} HTTP ${res.status}: ${body.slice(0, 300)}`)
+        if ((res.status >= 500 || res.status === 429) && attempt < maxAttempts) {
+          lastErr = err
+          await new Promise((r) => setTimeout(r, 400 * attempt))
+          continue
+        }
+        throw err
+      }
 
-    if (!res.ok) {
-      const body = await res.text().catch(() => '')
-      throw new Error(`NIM ${model} HTTP ${res.status}: ${body.slice(0, 300)}`)
+      const data = await res.json()
+      const raw = data?.choices?.[0]?.message?.content ?? ''
+      return { content: stripReasoning(String(raw)), model: data?.model || model }
+    } finally {
+      clearTimeout(timer)
     }
-
-    const data = await res.json()
-    const raw = data?.choices?.[0]?.message?.content ?? ''
-    return { content: stripReasoning(String(raw)), model: data?.model || model }
-  } finally {
-    clearTimeout(timer)
   }
+  throw lastErr ?? new Error(`NIM ${model} failed after ${maxAttempts} attempts`)
 }
 
 /**
