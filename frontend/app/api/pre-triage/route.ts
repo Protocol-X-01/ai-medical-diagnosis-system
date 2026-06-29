@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { matchConditions } from '@/lib/dynamodb'
+import { translateTexts, translateToLabel, LANGUAGES } from '@/lib/translate'
 
 export const runtime = 'nodejs'
 export const maxDuration = 20
@@ -47,10 +48,15 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Tell us a little about your symptoms.' }, { status: 400 })
     }
 
-    const blob = symptoms.join(' ').toLowerCase()
+    // Multilingual: translate the patient's input to English for matching, then
+    // translate the guidance back to their language on the way out.
+    const lang = typeof body?.lang === 'string' ? body.lang : 'en'
+    const enSymptoms = lang in LANGUAGES ? await translateToLabel(symptoms, 'English') : symptoms
+
+    const blob = enSymptoms.join(' ').toLowerCase()
     const emergencyHit = EMERGENCY.find((k) => blob.includes(k))
 
-    const scored = await matchConditions({ symptoms }, 4)
+    const scored = await matchConditions({ symptoms: enSymptoms }, 4)
     const top = scored[0]
     const watchFor = GENERAL_WATCH
     const possibleAreas = scored.map((s) => s.condition.name).slice(0, 3)
@@ -59,8 +65,25 @@ export async function POST(request: NextRequest) {
       'This is general guidance to help you decide what to do next — not a diagnosis. ' +
       'If you feel very unwell or are worried, seek medical help.'
 
+    // Build the response in English, then translate the patient-facing strings in
+    // a single batched call when a non-English language is requested.
+    const respond = async (p: {
+      disposition: string; headline: string; message: string
+      watchFor: string[]; possibleAreas: string[]; selfCare: string[]; disclaimer: string
+    }) => {
+      if (lang in LANGUAGES) {
+        const segs = [p.headline, p.message, p.disclaimer, ...p.selfCare, ...p.watchFor]
+        const tr = await translateTexts(segs, lang)
+        let i = 0
+        p.headline = tr[i++]; p.message = tr[i++]; p.disclaimer = tr[i++]
+        p.selfCare = p.selfCare.map(() => tr[i++])
+        p.watchFor = p.watchFor.map(() => tr[i++])
+      }
+      return NextResponse.json({ ...p, lang })
+    }
+
     if (emergencyHit) {
-      return NextResponse.json({
+      return respond({
         disposition: 'urgent',
         headline: 'Please seek urgent medical care now',
         message:
@@ -75,7 +98,7 @@ export async function POST(request: NextRequest) {
 
     // Non-urgent: recommend booking, and offer safe self-care in the meantime.
     const strong = top && top.score >= 0.5
-    return NextResponse.json({
+    return respond({
       disposition: strong ? 'book' : 'self-care',
       headline: strong
         ? 'We recommend booking an appointment'
