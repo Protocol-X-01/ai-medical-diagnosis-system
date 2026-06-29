@@ -10,7 +10,7 @@ import type { CaseInput } from '@/lib/types'
 // weighted quorum (+ escalation, citation integrity) -> safety gate -> audit write.
 // Runs as a Vercel serverless function (Node runtime).
 export const runtime = 'nodejs'
-export const maxDuration = 90
+export const maxDuration = 110
 
 // Seed index built once per warm lambda for the fallback path.
 const seedIndex = buildIndex(SEED_CONDITIONS)

@@ -29,17 +29,39 @@ import type {
 } from './types'
 
 interface VoterConfig {
-  agent: string
-  model: string
+  role: string
+  // Ordered fallback chain. NIM degrades individual model "functions" without
+  // notice (HTTP 400 "DEGRADED", 5xx, or timeouts), so each voter tries its models
+  // in order until one returns a usable response — a single degraded endpoint no
+  // longer abstains the whole voter.
+  models: string[]
   trust: number // relative trust weight
 }
 
-// Verified runnable on the project NIM key (2026-06-28). Three independent model
-// families for genuine vote independence.
+// Human-readable names — the vote reports the model that actually answered, even
+// when a voter falls back, so the displayed quorum stays honest.
+const MODEL_NAMES: Record<string, string> = {
+  'nvidia/nemotron-3-super-120b-a12b': 'NVIDIA Nemotron-3 Super 120B',
+  'meta/llama-3.3-70b-instruct': 'Meta Llama 3.3 70B',
+  'meta/llama-3.1-70b-instruct': 'Meta Llama 3.1 70B',
+  'meta/llama-3.1-8b-instruct': 'Meta Llama 3.1 8B',
+  'mistralai/mixtral-8x7b-instruct-v0.1': 'Mistral Mixtral 8x7B',
+  'qwen/qwen2.5-7b-instruct': 'Qwen 2.5 7B',
+}
+// NIM sometimes routes to a staging instance and reports e.g. "stg/<model>"; strip
+// that prefix so the displayed name stays clean.
+const prettyModel = (m: string) => {
+  const id = m.replace(/^stg\//, '')
+  return MODEL_NAMES[id] || id
+}
+const voterLabel = (role: string, model: string) => `${role} (${prettyModel(model)})`
+
+// Three independent voter slots, each a fallback chain across model families so the
+// quorum stays available even when NIM degrades a specific model.
 export const QUORUM_VOTERS: VoterConfig[] = [
-  { agent: 'Reasoning (NVIDIA Nemotron-3 Super 120B)', model: 'nvidia/nemotron-3-super-120b-a12b', trust: 1.1 },
-  { agent: 'Diagnostic (Meta Llama 3.3 70B)', model: 'meta/llama-3.3-70b-instruct', trust: 1.0 },
-  { agent: 'Cross-check (Mistral Mixtral 8x7B)', model: 'mistralai/mixtral-8x7b-instruct-v0.1', trust: 1.0 },
+  { role: 'Reasoning', models: ['nvidia/nemotron-3-super-120b-a12b', 'meta/llama-3.1-70b-instruct'], trust: 1.1 },
+  { role: 'Diagnostic', models: ['meta/llama-3.3-70b-instruct', 'meta/llama-3.1-70b-instruct'], trust: 1.0 },
+  { role: 'Cross-check', models: ['mistralai/mixtral-8x7b-instruct-v0.1', 'qwen/qwen2.5-7b-instruct', 'meta/llama-3.1-8b-instruct'], trust: 1.0 },
 ]
 
 // Senior tie-breaker for ambiguous/complex cases. A fallback chain of reliable,
@@ -138,34 +160,44 @@ async function runVoter(
   scored: ScoredCondition[]
 ): Promise<AgentVote> {
   const validIdSet = new Set(scored.flatMap((s) => s.condition.citations.map((ci) => ci.id)))
-  try {
-    const { content, model } = await nimChat({
-      model: cfg.model,
-      system: VOTER_SYSTEM,
-      user: buildVoterPrompt(input, scored),
-      temperature: 0.2,
-      maxTokens: 900,
-    })
-    const parsed = extractJson<Partial<AgentVote>>(content)
-    if (!parsed) return baseVote(cfg, model, 'Model returned unparseable output', content.slice(0, 200))
-    const citedSourceIds = (parsed.citedSourceIds || []).filter((id) => validIdSet.has(id))
-    return {
-      agent: cfg.agent,
-      model,
-      diagnosis: parsed.diagnosis ?? null,
-      icd10: parsed.icd10 ?? null,
-      confidence: clamp01(Number(parsed.confidence ?? 0)),
-      reasoning: String(parsed.reasoning ?? '').slice(0, 800),
-      citedSourceIds,
-      insufficientEvidence: Boolean(parsed.insufficientEvidence) || citedSourceIds.length === 0,
+  const prompt = buildVoterPrompt(input, scored)
+  let lastErr = 'no model available'
+  for (const candidate of cfg.models) {
+    try {
+      const { content, model } = await nimChat({
+        model: candidate,
+        system: VOTER_SYSTEM,
+        user: prompt,
+        temperature: 0.2,
+        maxTokens: 700,
+        timeoutMs: 60000,
+      })
+      const parsed = extractJson<Partial<AgentVote>>(content)
+      if (!parsed) { lastErr = 'unparseable output'; continue } // bad output → try next model
+      const citedSourceIds = (parsed.citedSourceIds || []).filter((id) => validIdSet.has(id))
+      return {
+        agent: voterLabel(cfg.role, model),
+        model,
+        diagnosis: parsed.diagnosis ?? null,
+        icd10: parsed.icd10 ?? null,
+        confidence: clamp01(Number(parsed.confidence ?? 0)),
+        reasoning: String(parsed.reasoning ?? '').slice(0, 800),
+        citedSourceIds,
+        insufficientEvidence: Boolean(parsed.insufficientEvidence) || citedSourceIds.length === 0,
+      }
+    } catch (err) {
+      lastErr = (err as Error).message
+      // A degraded/4xx/5xx endpoint fails fast → fall back to the next model. A
+      // timeout means the model was reachable but slow; chaining further would burn
+      // the function budget, so we stop and let 2-of-3 carry the quorum.
+      if (/abort|timed? ?out/i.test(lastErr)) break
     }
-  } catch (err) {
-    return baseVote(cfg, cfg.model, 'agent error', (err as Error).message)
   }
+  return baseVote(voterLabel(cfg.role, cfg.models[0]), cfg.models[0], 'agent error', lastErr)
 }
 
-function baseVote(cfg: VoterConfig, model: string, reasoning: string, error?: string): AgentVote {
-  return { agent: cfg.agent, model, diagnosis: null, icd10: null, confidence: 0, reasoning, citedSourceIds: [], insufficientEvidence: true, error }
+function baseVote(agent: string, model: string, reasoning: string, error?: string): AgentVote {
+  return { agent, model, diagnosis: null, icd10: null, confidence: 0, reasoning, citedSourceIds: [], insufficientEvidence: true, error }
 }
 
 // ---- weighted consensus ----------------------------------------------------
@@ -283,7 +315,7 @@ export async function runAdjudicator(input: CaseInput, scored: ScoredCondition[]
       const { content, model } = await nimChat({ model: cfg.model, system: VOTER_SYSTEM, user: prompt, temperature: 0.1, maxTokens: 1400, timeoutMs: 70000 })
       const parsed = extractJson<Partial<AgentVote>>(content)
       if (!parsed) {
-        last = baseVote({ agent: cfg.agent, model, trust: ADJUDICATOR_TRUST }, model, 'adjudicator unparseable', content.slice(0, 160))
+        last = baseVote(cfg.agent, model, 'adjudicator unparseable', content.slice(0, 160))
         continue
       }
       const citedSourceIds = (parsed.citedSourceIds || []).filter((id) => validIdSet.has(id))
@@ -291,10 +323,10 @@ export async function runAdjudicator(input: CaseInput, scored: ScoredCondition[]
       if (vote.diagnosis && !vote.insufficientEvidence) return vote // committed verdict
       last = vote
     } catch (err) {
-      last = baseVote({ agent: cfg.agent, model: cfg.model, trust: ADJUDICATOR_TRUST }, cfg.model, 'adjudicator error', (err as Error).message)
+      last = baseVote(cfg.agent, cfg.model, 'adjudicator error', (err as Error).message)
     }
   }
-  return last ?? baseVote({ agent: ADJUDICATOR_MODELS[0].agent, model: ADJUDICATOR_MODELS[0].model, trust: ADJUDICATOR_TRUST }, ADJUDICATOR_MODELS[0].model, 'no adjudicator available')
+  return last ?? baseVote(ADJUDICATOR_MODELS[0].agent, ADJUDICATOR_MODELS[0].model, 'no adjudicator available')
 }
 
 // ---- safety + citations ----------------------------------------------------
@@ -380,7 +412,7 @@ export async function runQuorum(input: CaseInput, scored: ScoredCondition[]): Pr
     metadata: {
       timestamp: new Date().toISOString(),
       quorumThreshold: `weighted · min ${QUORUM_MIN_VOTES}/${QUORUM_VOTERS.length}`,
-      modelsConsulted: [...QUORUM_VOTERS.map((v) => v.model), SAFETY_MODEL],
+      modelsConsulted: [...new Set(allVotes.map((v) => v.model)), SAFETY_MODEL],
       processingTimeMs: Date.now() - start,
       grounded: scored.length > 0,
     },
