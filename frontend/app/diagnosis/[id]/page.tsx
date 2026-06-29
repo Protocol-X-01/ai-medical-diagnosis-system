@@ -1,211 +1,143 @@
+'use client'
+
+import { useEffect, useState } from 'react'
+import { useParams } from 'next/navigation'
 import Link from 'next/link'
-import { ArrowLeft, Activity, Calendar, FileText, ExternalLink, CheckCircle } from 'lucide-react'
-
 import Header from '@/components/Header'
+import Footer from '@/components/Footer'
+import { Loader2, ShieldCheck, ShieldAlert, AlertTriangle, Stethoscope, ExternalLink, ArrowLeft } from 'lucide-react'
+import type { DiagnosisResponse } from '@/lib/types'
 
-export default function DiagnosisDetailPage({ params }: { params: { id: string } }) {
-  // Mock data - in production, fetch based on params.id
-  const diagnosis = {
-    id: params.id,
-    patientId: 'P-2024-001',
-    patientName: 'John Doe',
-    diagnosis: 'ST-Elevation Myocardial Infarction (STEMI)',
-    icd10Code: 'I21.3',
-    confidence: 0.94,
-    date: '2024-05-27T10:30:00Z',
-    urgency: 'emergency',
-    symptoms: ['Severe chest pain', 'Shortness of breath', 'Nausea', 'Sweating', 'Left arm pain'],
-    vitalSigns: {
-      temperature: '98.6°F',
-      bloodPressure: '145/95',
-      heartRate: '105 bpm',
-      respiratoryRate: '22',
-      oxygenSaturation: '94%'
-    },
-    agentVotes: {
-      diagnostic: { vote: 'STEMI', confidence: 0.96 },
-      research: { vote: 'STEMI', confidence: 0.93 },
-      imaging: { vote: 'STEMI', confidence: 0.95 },
-      validation: { vote: 'STEMI', confidence: 0.92 },
-      consensus: { vote: 'STEMI', confidence: 0.94 }
-    },
-    citations: [
-      {
-        title: 'Fourth Universal Definition of Myocardial Infarction (2018)',
-        source: 'European Heart Journal',
-        url: 'https://pubmed.ncbi.nlm.nih.gov/30165617/'
-      },
-      {
-        title: '2017 ESC Guidelines for STEMI Management',
-        source: 'European Society of Cardiology',
-        url: 'https://pubmed.ncbi.nlm.nih.gov/28886621/'
-      }
-    ],
-    recommendations: [
-      'Immediate cardiac catheterization',
-      'Aspirin 325mg administration',
-      'Cardiology consultation - URGENT',
-      'Continuous cardiac monitoring',
-      'Serial troponin measurements'
-    ]
-  }
+const pct = (n: number) => `${Math.round(n * 100)}%`
 
-  const getUrgencyColor = (urgency: string) => {
-    switch (urgency) {
-      case 'emergency': return 'bg-red-100 text-red-700 border-red-200'
-      case 'urgent': return 'bg-orange-100 text-orange-700 border-orange-200'
-      default: return 'bg-green-100 text-green-700 border-green-200'
-    }
-  }
+export default function DiagnosisDetailPage() {
+  const params = useParams<{ id: string }>()
+  const id = params?.id
+  const [data, setData] = useState<DiagnosisResponse | null>(null)
+  const [status, setStatus] = useState<'loading' | 'ok' | 'notfound' | 'error'>('loading')
+
+  useEffect(() => {
+    if (!id) return
+    fetch(`/api/diagnoses/${id}`)
+      .then(async (r) => {
+        if (r.status === 404) { setStatus('notfound'); return }
+        if (!r.ok) { setStatus('error'); return }
+        setData(await r.json()); setStatus('ok')
+      })
+      .catch(() => setStatus('error'))
+  }, [id])
+
+  const c = data?.consensus
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="flex min-h-screen flex-col bg-slate-50">
       <Header />
+      <main className="mx-auto w-full max-w-3xl flex-1 px-4 py-8">
+        <Link href="/diagnoses" className="mb-4 inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-slate-700">
+          <ArrowLeft className="h-4 w-4" /> All assessments
+        </Link>
 
-      <main className="container mx-auto px-4 py-8 max-w-6xl">
-        {/* Header */}
-        <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 mb-6">
-          <div className="flex items-start justify-between mb-4">
+        {status === 'loading' && (
+          <div className="flex items-center gap-2 py-16 text-slate-400"><Loader2 className="h-5 w-5 animate-spin" /> Loading assessment…</div>
+        )}
+        {status === 'notfound' && (
+          <div className="rounded-xl border border-slate-200 bg-white p-8 text-center text-slate-500">Assessment <span className="font-mono text-xs">{id}</span> was not found in the audit trail.</div>
+        )}
+        {status === 'error' && (
+          <div className="rounded-xl border border-rose-200 bg-rose-50 p-8 text-center text-rose-600">Could not load this assessment.</div>
+        )}
+
+        {status === 'ok' && data && c && (
+          <div className="space-y-5">
             <div>
-              <div className="flex items-center gap-3 mb-2">
-                <span className="text-sm font-medium text-gray-500">{diagnosis.patientId}</span>
-                <span className="text-sm text-gray-400">•</span>
-                <span className="text-sm font-medium text-gray-700">{diagnosis.patientName}</span>
-                <span className={`px-3 py-1 rounded-full text-xs font-medium border ${getUrgencyColor(diagnosis.urgency)}`}>
-                  {diagnosis.urgency.toUpperCase()}
-                </span>
-              </div>
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">{diagnosis.diagnosis}</h1>
-              <div className="flex items-center gap-4 text-sm text-gray-600">
-                <span>ICD-10: {diagnosis.icd10Code}</span>
-                <span>•</span>
-                <span className="flex items-center gap-1">
-                  <Calendar className="w-4 h-4" />
-                  {new Date(diagnosis.date).toLocaleString()}
-                </span>
-              </div>
+              <p className="font-mono text-xs text-slate-400">{data.requestId}</p>
+              <p className="text-xs text-slate-400">{data.metadata?.timestamp ? new Date(data.metadata.timestamp).toLocaleString() : ''}</p>
             </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold text-blue-600 mb-1">
-                {Math.round(diagnosis.confidence * 100)}%
-              </div>
-              <div className="text-sm text-gray-600">Confidence</div>
-            </div>
-          </div>
-        </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Main Content */}
-          <div className="lg:col-span-2 space-y-6">
-            {/* Symptoms */}
-            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-              <h2 className="text-xl font-bold text-gray-900 mb-4">Reported Symptoms</h2>
-              <div className="flex flex-wrap gap-2">
-                {diagnosis.symptoms.map((symptom, index) => (
-                  <span key={index} className="px-3 py-2 bg-blue-50 text-blue-700 rounded-lg text-sm">
-                    {symptom}
+            {/* Consensus */}
+            {c.reached ? (
+              <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+                <div className="flex items-center justify-between gap-4 border-b border-slate-100 p-6">
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-wider text-teal-600">Consensus</p>
+                    <h1 className="text-2xl font-bold text-slate-900">{c.diagnosis}</h1>
+                    <p className="text-sm text-slate-500">{c.icd10} · agreement {c.agreement}</p>
+                  </div>
+                  <span className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-teal-500 to-blue-600 text-xl font-bold text-white">{Math.round(c.confidence * 100)}</span>
+                </div>
+                <div className="flex gap-6 p-6 text-sm text-slate-600">
+                  <span>Weighted share <strong className="text-slate-900">{pct(c.topWeightShare)}</strong></span>
+                  <span>Margin <strong className="text-slate-900">{pct(c.margin)}</strong></span>
+                  <span className={`ml-auto inline-flex items-center gap-1.5 ${data.safety?.safe ? 'text-emerald-600' : 'text-amber-600'}`}>
+                    {data.safety?.safe ? <ShieldCheck className="h-4 w-4" /> : <ShieldAlert className="h-4 w-4" />} {data.safety?.safe ? 'Safety passed' : 'Safety flagged'}
                   </span>
-                ))}
-              </div>
-            </div>
+                </div>
+              </section>
+            ) : (
+              <section className="rounded-2xl border border-amber-200 bg-amber-50 p-6">
+                <div className="flex items-center gap-2 font-semibold text-amber-800"><AlertTriangle className="h-5 w-5" /> Ranked options (no single consensus)</div>
+                <div className="mt-3 space-y-1">
+                  {c.differentials.map((d, i) => (
+                    <p key={d.diagnosis + i} className="text-sm text-slate-700">{i + 1}. {d.diagnosis}{d.icd10 ? ` (${d.icd10})` : ''} · {pct(d.weight)}</p>
+                  ))}
+                </div>
+              </section>
+            )}
 
-            {/* Vital Signs */}
-            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-              <h2 className="text-xl font-bold text-gray-900 mb-4">Vital Signs</h2>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                {Object.entries(diagnosis.vitalSigns).map(([key, value]) => (
-                  <div key={key}>
-                    <div className="text-sm text-gray-600 mb-1">
-                      {key.replace(/([A-Z])/g, ' $1').trim()}
-                    </div>
-                    <div className="text-lg font-semibold text-gray-900">{value}</div>
+            {/* Recommendations */}
+            {data.recommendations && (data.recommendations.treatments.length > 0 || data.recommendations.redFlags.length > 0) && (
+              <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+                <h3 className="mb-3 text-sm font-semibold text-slate-900">Suggested management</h3>
+                {data.recommendations.treatments.length > 0 && (
+                  <div className="mb-3 flex flex-wrap gap-2">
+                    {data.recommendations.treatments.map((t) => <span key={t} className="rounded-lg bg-teal-50 px-2.5 py-1 text-sm text-teal-800"><Stethoscope className="mr-1 inline h-3.5 w-3.5" />{t}</span>)}
                   </div>
-                ))}
-              </div>
-            </div>
+                )}
+                {data.recommendations.redFlags.length > 0 && (
+                  <ul className="space-y-1">
+                    {data.recommendations.redFlags.map((r) => <li key={r} className="flex items-start gap-2 text-sm text-slate-700"><span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-rose-400" />{r}</li>)}
+                  </ul>
+                )}
+              </section>
+            )}
 
-            {/* Agent Consensus */}
-            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-              <h2 className="text-xl font-bold text-gray-900 mb-4">AI Agent Consensus</h2>
-              <div className="space-y-3">
-                {Object.entries(diagnosis.agentVotes).map(([agent, data]) => (
-                  <div key={agent} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                    <div className="flex items-center gap-3">
-                      <CheckCircle className="w-5 h-5 text-green-600" />
-                      <span className="font-medium text-gray-900 capitalize">{agent} Agent</span>
+            {/* Votes */}
+            {data.votes?.length > 0 && (
+              <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+                <h3 className="mb-3 text-sm font-semibold text-slate-900">Independent model votes</h3>
+                <div className="space-y-2">
+                  {data.votes.map((v, i) => (
+                    <div key={v.model + i} className="flex items-center justify-between gap-2 text-sm">
+                      <span className="truncate text-slate-700">{v.agent}</span>
+                      <span className="truncate text-slate-500">{v.insufficientEvidence ? 'abstained' : `${v.diagnosis} (${v.icd10})`}</span>
+                      <span className="w-10 text-right text-xs text-slate-400">{v.insufficientEvidence ? '—' : pct(v.confidence)}</span>
                     </div>
-                    <div className="flex items-center gap-4">
-                      <span className="text-sm text-gray-600">{data.vote}</span>
-                      <span className="font-semibold text-blue-600">
-                        {Math.round(data.confidence * 100)}%
-                      </span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+                  ))}
+                </div>
+              </section>
+            )}
 
             {/* Citations */}
-            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-              <h2 className="text-xl font-bold text-gray-900 mb-4">Medical Literature Citations</h2>
-              <div className="space-y-4">
-                {diagnosis.citations.map((citation, index) => (
-                  <div key={index} className="border-l-4 border-blue-600 pl-4">
-                    <h3 className="font-semibold text-gray-900 mb-1">{citation.title}</h3>
-                    <p className="text-sm text-gray-600 mb-2">{citation.source}</p>
-                    <a
-                      href={citation.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm text-blue-600 hover:text-blue-700 flex items-center gap-1"
-                    >
-                      View Source
-                      <ExternalLink className="w-3 h-3" />
-                    </a>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+            {data.citations?.length > 0 && (
+              <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+                <h3 className="mb-3 text-sm font-semibold text-slate-900">Sources</h3>
+                <ul className="space-y-1.5">
+                  {data.citations.map((ci) => (
+                    <li key={ci.id}>
+                      <a href={ci.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-sm text-blue-600 hover:underline">
+                        {ci.source}: {ci.title} <ExternalLink className="h-3 w-3" />
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
 
-          {/* Sidebar */}
-          <div className="space-y-6">
-            {/* Recommendations */}
-            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-              <h2 className="text-lg font-bold text-gray-900 mb-4">Recommendations</h2>
-              <ul className="space-y-3">
-                {diagnosis.recommendations.map((rec, index) => (
-                  <li key={index} className="flex items-start gap-2 text-sm text-gray-700">
-                    <Activity className="w-4 h-4 text-blue-600 flex-shrink-0 mt-0.5" />
-                    <span>{rec}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Actions */}
-            <div className="bg-blue-50 border border-blue-200 p-6 rounded-xl">
-              <h3 className="font-bold text-blue-900 mb-4">Quick Actions</h3>
-              <div className="space-y-2">
-                <button className="w-full bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors">
-                  Export Report
-                </button>
-                <button className="w-full bg-white text-blue-600 py-2 rounded-lg font-medium border border-blue-600 hover:bg-blue-50 transition-colors">
-                  Share with Team
-                </button>
-                <Link
-                  href={`/patients/${diagnosis.patientId}`}
-                  className="block w-full bg-white text-gray-700 py-2 rounded-lg font-medium border border-gray-300 hover:bg-gray-50 transition-colors text-center"
-                >
-                  View Patient Record
-                </Link>
-              </div>
-            </div>
+            <p className="rounded-xl bg-slate-100 p-4 text-xs leading-relaxed text-slate-500">{data.disclaimer}</p>
           </div>
-        </div>
+        )}
       </main>
+      <Footer />
     </div>
   )
 }
-
-// Made with Bob
