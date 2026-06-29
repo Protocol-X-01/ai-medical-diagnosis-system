@@ -39,7 +39,7 @@ interface VoterConfig {
 export const QUORUM_VOTERS: VoterConfig[] = [
   { agent: 'Reasoning (NVIDIA Nemotron-3 Super 120B)', model: 'nvidia/nemotron-3-super-120b-a12b', trust: 1.1 },
   { agent: 'Diagnostic (Meta Llama 3.3 70B)', model: 'meta/llama-3.3-70b-instruct', trust: 1.0 },
-  { agent: 'Cross-check (Mistral Nemotron)', model: 'mistralai/mistral-nemotron', trust: 1.0 },
+  { agent: 'Cross-check (Mistral Mixtral 8x7B)', model: 'mistralai/mixtral-8x7b-instruct-v0.1', trust: 1.0 },
 ]
 
 // Senior tie-breaker for ambiguous/complex cases. A fallback chain of reliable,

@@ -484,7 +484,7 @@ function EmptyState() {
 }
 
 function LoadingState() {
-  const steps = ['Retrieving grounded candidates from DynamoDB', 'Nemotron-3 Super 120B voting', 'Llama 3.3 70B voting', 'Mistral Nemotron voting', 'Weighing consensus & screening safety']
+  const steps = ['Retrieving grounded candidates from DynamoDB', 'Nemotron-3 Super 120B voting', 'Llama 3.3 70B voting', 'Mixtral 8x7B voting', 'Weighing consensus & screening safety']
   return (
     <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
       <div className="flex items-center gap-2 font-semibold text-slate-800"><Loader2 className="h-5 w-5 animate-spin text-blue-600" /> Running the quorum</div>

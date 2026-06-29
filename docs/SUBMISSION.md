@@ -21,7 +21,7 @@ verified medical sources** — and any output that cannot be traced to a source 
 
 **Key capabilities:**
 - **Multi-model quorum** — three independent LLMs from different families (NVIDIA Nemotron-3 Super
-  120B, Meta Llama 3.3 70B, Mistral Nemotron) on **NVIDIA NIM** vote independently; **2-of-3
+  120B, Meta Llama 3.3 70B, Mistral Mixtral 8x7B) on **NVIDIA NIM** vote independently; **2-of-3
   consensus** required; a dedicated content-safety model screens the result; and a
   **citation-integrity rule drops any source a model invents**. This makes a generative system
   hallucination-*resistant*.

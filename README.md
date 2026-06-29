@@ -26,7 +26,7 @@ verified, retrieved conditions, and any output that can't be traced to a stored 
 ## Key capabilities
 
 - **Multi-model quorum** — three independent LLMs from different families (NVIDIA Nemotron-3 Super
-  120B, Meta Llama 3.3 70B, Mistral Nemotron) on NVIDIA NIM vote independently; a **2-of-3
+  120B, Meta Llama 3.3 70B, Mistral Mixtral 8x7B) on NVIDIA NIM vote independently; a **2-of-3
   consensus** is required; a dedicated content-safety model screens the result; and a
   **citation-integrity rule drops any source a model invents.**
 - **Ambiguity → ranked options** — when no single condition dominates, the system presents the
